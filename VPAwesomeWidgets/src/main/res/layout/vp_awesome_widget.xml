@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vpParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/vp_auto_back"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/vpLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/vp_lable_back"
+        android:gravity="center"
+        android:minHeight="40dp"
+        android:paddingStart="12dp"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        android:id="@+id/vpAutoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/vpDropFrame"
+        android:layout_toEndOf="@id/vpLabel"
+        android:background="@android:color/transparent"
+        android:inputType="textNoSuggestions"
+        android:minHeight="40dp"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/vpSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overlapAnchor="false"
+        android:layout_toEndOf="@id/vpLabel"
+        android:background="@android:color/transparent"
+        android:minHeight="40dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/curveImg"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/vpLabel"
+        android:layout_toEndOf="@id/vpLabel"
+        android:minHeight="40dp"
+        android:tint="#c3c3c3"
+        android:scaleType="fitXY"
+        android:src="@drawable/vp_spinner_head" />
+
+    <FrameLayout
+        android:id="@+id/vpDropFrame"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/vp_drop_back"
+        android:minHeight="40dp">
+
+        <ImageView
+            android:id="@+id/vpDropIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/vp_drop_icon"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+</RelativeLayout>

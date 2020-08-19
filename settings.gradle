@@ -1,0 +1,3 @@
+include ':VPAwesomeWidgets'
+include ':app'
+rootProject.name = "VPAwesomeWidgetsSample"

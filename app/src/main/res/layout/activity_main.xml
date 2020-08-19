@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".MainActivity">
+
+    <awesome.vrund.vpawesomewidgets.VPSpinner
+        android:id="@+id/countriesSpn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:vp_hasLabel="false"
+        app:vp_labelText="Countries" />
+
+    <awesome.vrund.vpawesomewidgets.VPAutoCompleteTextView
+        android:id="@+id/countriesDrop"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        app:vp_hasLabel="true"
+        app:vp_hint="Select Country"
+        app:vp_labelText="Countries" />
+
+</LinearLayout>
