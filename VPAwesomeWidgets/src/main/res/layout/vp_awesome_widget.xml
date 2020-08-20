@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/vpLabel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/vp_lable_back"
         android:gravity="center"
         android:minHeight="40dp"
@@ -22,7 +22,7 @@
     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
         android:id="@+id/vpAutoText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_toStartOf="@id/vpDropFrame"
         android:layout_toEndOf="@id/vpLabel"
         android:background="@android:color/transparent"
@@ -36,7 +36,7 @@
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/vpSpinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:overlapAnchor="false"
         android:layout_toEndOf="@id/vpLabel"
         android:background="@android:color/transparent"
@@ -46,18 +46,18 @@
     <ImageView
         android:id="@+id/curveImg"
         android:layout_width="36dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignBottom="@id/vpLabel"
         android:layout_toEndOf="@id/vpLabel"
         android:minHeight="40dp"
-        android:tint="#c3c3c3"
+        app:tint="#c3c3c3"
         android:scaleType="fitXY"
         android:src="@drawable/vp_spinner_head" />
 
     <FrameLayout
         android:id="@+id/vpDropFrame"
         android:layout_width="36dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:background="@drawable/vp_drop_back"
         android:minHeight="40dp">

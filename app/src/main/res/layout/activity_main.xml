@@ -11,7 +11,7 @@
     <awesome.vrund.vpawesomewidgets.VPSpinner
         android:id="@+id/countriesSpn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         app:sp_hasLabel="false"
         app:sp_labelText="Countries" />
 
@@ -19,7 +19,7 @@
         android:id="@+id/countriesDrop"
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         app:act_hasLabel="true"
         app:act_hint="Select Country"
         app:act_labelText="Countries" />
