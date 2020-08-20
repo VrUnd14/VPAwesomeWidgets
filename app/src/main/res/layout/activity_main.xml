@@ -12,16 +12,16 @@
         android:id="@+id/countriesSpn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:vp_hasLabel="false"
-        app:vp_labelText="Countries" />
+        app:sp_hasLabel="false"
+        app:sp_labelText="Countries" />
 
     <awesome.vrund.vpawesomewidgets.VPAutoCompleteTextView
         android:id="@+id/countriesDrop"
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
         android:layout_height="wrap_content"
-        app:vp_hasLabel="true"
-        app:vp_hint="Select Country"
-        app:vp_labelText="Countries" />
+        app:act_hasLabel="true"
+        app:act_hint="Select Country"
+        app:act_labelText="Countries" />
 
 </LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VPAutoCompleteTextView">
+        <attr name="act_cornerRadius" format="dimension" />
+        <attr name="act_backColor" format="color" />
+        <attr name="act_hasBorder" format="boolean" />
+
+        <attr name="act_hasLabel" format="boolean" />
+        <attr name="act_labelText" format="string" />
+        <attr name="act_labelTextSize" format="dimension" />
+        <attr name="act_labelTextColor" format="color" />
+
+        <attr name="act_dropSize" format="dimension" />
+        <attr name="act_dropIcon" format="reference" />
+        <attr name="act_dropIconTint" format="color" />
+
+        <attr name="act_tint" format="color" />
+
+        <attr name="act_hint" format="string" />
+        <attr name="act_text" format="string" />
+        <attr name="act_hintColor" format="color" />
+        <attr name="act_textColor" format="color" />
+        <attr name="act_textSize" format="dimension" />
+        <attr name="act_textStyle" format="enum">
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="normal" value="0" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="VPSpinner">
+        <attr name="sp_cornerRadius" format="dimension" />
+        <attr name="sp_backColor" format="color" />
+        <attr name="sp_hasBorder" format="boolean" />
+
+        <attr name="sp_hasLabel" format="boolean" />
+        <attr name="sp_labelText" format="string" />
+        <attr name="sp_labelTextSize" format="dimension" />
+        <attr name="sp_labelTextColor" format="color" />
+
+        <attr name="sp_dropSize" format="dimension" />
+        <attr name="sp_dropIcon" format="reference" />
+        <attr name="sp_dropIconTint" format="color" />
+
+        <attr name="sp_tint" format="color" />
+    </declare-styleable>
+</resources>

@@ -44,21 +44,21 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         View.inflate(mContext, R.layout.vp_awesome_widget, this)
         val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPSpinner)
 
-        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPSpinner_vp_cornerRadius, cornerRadius)
-        backColor = parent.getColor(R.styleable.VPSpinner_vp_backColor, backColor)
-        hasBorder = parent.getBoolean(R.styleable.VPSpinner_vp_hasBorder, hasBorder)
+        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_cornerRadius, cornerRadius)
+        backColor = parent.getColor(R.styleable.VPSpinner_sp_backColor, backColor)
+        hasBorder = parent.getBoolean(R.styleable.VPSpinner_sp_hasBorder, hasBorder)
 
-        hasLabel = parent.getBoolean(R.styleable.VPSpinner_vp_hasLabel, hasLabel)
-        if (parent.hasValue(R.styleable.VPSpinner_vp_labelText))
-            labelText = parent.getString(R.styleable.VPSpinner_vp_labelText).toString()
-        labelTextSize = parent.getDimensionPixelSize(R.styleable.VPSpinner_vp_labelTextSize, labelTextSize)
-        labelTextColor = parent.getColor(R.styleable.VPSpinner_vp_labelTextColor, labelTextColor)
+        hasLabel = parent.getBoolean(R.styleable.VPSpinner_sp_hasLabel, hasLabel)
+        if (parent.hasValue(R.styleable.VPSpinner_sp_labelText))
+            labelText = parent.getString(R.styleable.VPSpinner_sp_labelText).toString()
+        labelTextSize = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_labelTextSize, labelTextSize)
+        labelTextColor = parent.getColor(R.styleable.VPSpinner_sp_labelTextColor, labelTextColor)
 
-        dropSize = parent.getDimensionPixelSize(R.styleable.VPSpinner_vp_dropSize, dropSize)
-        dropIcon = ContextCompat.getDrawable(mContext, parent.getResourceId(R.styleable.VPSpinner_vp_dropIcon, R.drawable.vp_drop_icon))
-        dropIconTint = parent.getColor(R.styleable.VPSpinner_vp_dropIconTint, dropIconTint)
+        dropSize = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_dropSize, dropSize)
+        dropIcon = ContextCompat.getDrawable(mContext, parent.getResourceId(R.styleable.VPSpinner_sp_dropIcon, R.drawable.vp_drop_icon))
+        dropIconTint = parent.getColor(R.styleable.VPSpinner_sp_dropIconTint, dropIconTint)
 
-        tinColor = parent.getColor(R.styleable.VPSpinner_vp_tint, tinColor)
+        tinColor = parent.getColor(R.styleable.VPSpinner_sp_tint, tinColor)
         parent.recycle()
 
         vpSpinner.visibility = View.VISIBLE
