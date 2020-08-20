@@ -1,6 +1,5 @@
 package awesome.vrund.vpawesomewidgets
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
@@ -8,11 +7,13 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.Filterable
+import android.widget.RelativeLayout
+import android.widget.SpinnerAdapter
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 
-@SuppressLint("CustomViewStyleable")
 class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
         RelativeLayout(context, attrs, defStyleAttr) {
 
@@ -41,23 +42,23 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     init {
         View.inflate(mContext, R.layout.vp_awesome_widget, this)
-        val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPAwesomeWidget)
+        val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPSpinner)
 
-        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPAwesomeWidget_vp_cornerRadius, cornerRadius)
-        backColor = parent.getColor(R.styleable.VPAwesomeWidget_vp_backColor, backColor)
-        hasBorder = parent.getBoolean(R.styleable.VPAwesomeWidget_vp_hasBorder, hasBorder)
+        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPSpinner_vp_cornerRadius, cornerRadius)
+        backColor = parent.getColor(R.styleable.VPSpinner_vp_backColor, backColor)
+        hasBorder = parent.getBoolean(R.styleable.VPSpinner_vp_hasBorder, hasBorder)
 
-        hasLabel = parent.getBoolean(R.styleable.VPAwesomeWidget_vp_hasLabel, hasLabel)
-        if (parent.hasValue(R.styleable.VPAwesomeWidget_vp_labelText))
-            labelText = parent.getString(R.styleable.VPAwesomeWidget_vp_labelText).toString()
-        labelTextSize = parent.getDimensionPixelSize(R.styleable.VPAwesomeWidget_vp_labelTextSize, labelTextSize)
-        labelTextColor = parent.getColor(R.styleable.VPAwesomeWidget_vp_labelTextColor, labelTextColor)
+        hasLabel = parent.getBoolean(R.styleable.VPSpinner_vp_hasLabel, hasLabel)
+        if (parent.hasValue(R.styleable.VPSpinner_vp_labelText))
+            labelText = parent.getString(R.styleable.VPSpinner_vp_labelText).toString()
+        labelTextSize = parent.getDimensionPixelSize(R.styleable.VPSpinner_vp_labelTextSize, labelTextSize)
+        labelTextColor = parent.getColor(R.styleable.VPSpinner_vp_labelTextColor, labelTextColor)
 
-        dropSize = parent.getDimensionPixelSize(R.styleable.VPAwesomeWidget_vp_dropSize, dropSize)
-        dropIcon = ContextCompat.getDrawable(mContext, parent.getResourceId(R.styleable.VPAwesomeWidget_vp_dropIcon, R.drawable.vp_drop_icon))
-        dropIconTint = parent.getColor(R.styleable.VPAwesomeWidget_vp_dropIconTint, dropIconTint)
+        dropSize = parent.getDimensionPixelSize(R.styleable.VPSpinner_vp_dropSize, dropSize)
+        dropIcon = ContextCompat.getDrawable(mContext, parent.getResourceId(R.styleable.VPSpinner_vp_dropIcon, R.drawable.vp_drop_icon))
+        dropIconTint = parent.getColor(R.styleable.VPSpinner_vp_dropIconTint, dropIconTint)
 
-        tinColor = parent.getColor(R.styleable.VPAwesomeWidget_vp_tint, tinColor)
+        tinColor = parent.getColor(R.styleable.VPSpinner_vp_tint, tinColor)
         parent.recycle()
 
         vpSpinner.visibility = View.VISIBLE

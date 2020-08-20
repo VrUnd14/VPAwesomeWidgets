@@ -1,6 +1,5 @@
 package awesome.vrund.vpawesomewidgets
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
@@ -16,7 +15,6 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 
-@SuppressLint("CustomViewStyleable")
 class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
         RelativeLayout(context, attrs, defStyleAttr) {
 
@@ -49,26 +47,24 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
 
     init {
         View.inflate(mContext, R.layout.vp_awesome_widget, this)
-        val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPAwesomeWidget)
+        val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPAutoCompleteTextView)
 
-        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPAwesomeWidget_vp_cornerRadius, cornerRadius)
-        backColor = parent.getColor(R.styleable.VPAwesomeWidget_vp_backColor, backColor)
-        hasBorder = parent.getBoolean(R.styleable.VPAwesomeWidget_vp_hasBorder, hasBorder)
+        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_vp_cornerRadius, cornerRadius)
+        backColor = parent.getColor(R.styleable.VPAutoCompleteTextView_vp_backColor, backColor)
+        hasBorder = parent.getBoolean(R.styleable.VPAutoCompleteTextView_vp_hasBorder, hasBorder)
 
-        hasLabel = parent.getBoolean(R.styleable.VPAwesomeWidget_vp_hasLabel, hasLabel)
-        if (parent.hasValue(R.styleable.VPAwesomeWidget_vp_labelText))
-            labelText = parent.getString(R.styleable.VPAwesomeWidget_vp_labelText).toString()
-        labelTextSize = parent.getDimensionPixelSize(R.styleable.VPAwesomeWidget_vp_labelTextSize, labelTextSize)
-        labelTextColor = parent.getColor(R.styleable.VPAwesomeWidget_vp_labelTextColor, labelTextColor)
+        hasLabel = parent.getBoolean(R.styleable.VPAutoCompleteTextView_vp_hasLabel, hasLabel)
+        if (parent.hasValue(R.styleable.VPAutoCompleteTextView_vp_labelText))
+            labelText = parent.getString(R.styleable.VPAutoCompleteTextView_vp_labelText).toString()
+        labelTextSize = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_vp_labelTextSize, labelTextSize)
+        labelTextColor = parent.getColor(R.styleable.VPAutoCompleteTextView_vp_labelTextColor, labelTextColor)
 
-        dropSize = parent.getDimensionPixelSize(R.styleable.VPAwesomeWidget_vp_dropSize, dropSize)
-        dropIcon = ContextCompat.getDrawable(mContext, parent.getResourceId(R.styleable.VPAwesomeWidget_vp_dropIcon, R.drawable.vp_drop_icon))
-        dropIconTint = parent.getColor(R.styleable.VPAwesomeWidget_vp_dropIconTint, dropIconTint)
+        dropSize = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_vp_dropSize, dropSize)
+        dropIcon = ContextCompat.getDrawable(mContext, parent.getResourceId(R.styleable.VPAutoCompleteTextView_vp_dropIcon, R.drawable.vp_drop_icon))
+        dropIconTint = parent.getColor(R.styleable.VPAutoCompleteTextView_vp_dropIconTint, dropIconTint)
 
-        tinColor = parent.getColor(R.styleable.VPAwesomeWidget_vp_tint, tinColor)
-        parent.recycle()
+        tinColor = parent.getColor(R.styleable.VPAutoCompleteTextView_vp_tint, tinColor)
 
-        val child = mContext.obtainStyledAttributes(attrs, R.styleable.VPAutoCompleteTextView)
         vpAutoText.visibility = View.VISIBLE
         if (parent.hasValue(R.styleable.VPAutoCompleteTextView_vp_hint))
             hint = parent.getString(R.styleable.VPAutoCompleteTextView_vp_hint).toString()
@@ -79,13 +75,14 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
         textSize = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_vp_textSize, textSize)
         textStyle = parent.getInt(R.styleable.VPAutoCompleteTextView_vp_textStyle, textStyle)
 
+        parent.recycle()
+
         updateUI()
 
         vpDropFrame.setOnClickListener {
             vpAutoText.showDropDown()
         }
         vpAutoText.onItemClickListener = MyItemClickListener(this)
-        child.recycle()
     }
 
     private fun updateUI() {

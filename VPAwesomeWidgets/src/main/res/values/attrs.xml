@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="VPAwesomeWidget">
+    <declare-styleable name="VPAutoCompleteTextView">
         <attr name="vp_cornerRadius" format="dimension" />
         <attr name="vp_backColor" format="color" />
         <attr name="vp_hasBorder" format="boolean" />
@@ -15,9 +15,7 @@
         <attr name="vp_dropIconTint" format="color" />
 
         <attr name="vp_tint" format="color" />
-    </declare-styleable>
 
-    <declare-styleable name="VPAutoCompleteTextView">
         <attr name="vp_hint" format="string" />
         <attr name="vp_text" format="string" />
         <attr name="vp_hintColor" format="color" />
@@ -28,5 +26,22 @@
             <enum name="italic" value="2" />
             <enum name="normal" value="0" />
         </attr>
+    </declare-styleable>
+
+    <declare-styleable name="VPSpinner">
+        <attr name="vp_cornerRadius" format="dimension" />
+        <attr name="vp_backColor" format="color" />
+        <attr name="vp_hasBorder" format="boolean" />
+
+        <attr name="vp_hasLabel" format="boolean" />
+        <attr name="vp_labelText" format="string" />
+        <attr name="vp_labelTextSize" format="dimension" />
+        <attr name="vp_labelTextColor" format="color" />
+
+        <attr name="vp_dropSize" format="dimension" />
+        <attr name="vp_dropIcon" format="reference" />
+        <attr name="vp_dropIconTint" format="color" />
+
+        <attr name="vp_tint" format="color" />
     </declare-styleable>
 </resources>
