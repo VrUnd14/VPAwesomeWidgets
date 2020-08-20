@@ -1,0 +1,45 @@
+apply plugin: 'com.jfrog.bintray'
+
+version = '1.0.0' //YOUR LIBRARY VERSION
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    enabled = false
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+
+// Bintray
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = 'VPAwesomeWidgets' // YOUR REPOSITORY NAME FROM BINTRAY ACCOUNT
+        name = 'awesome.vrund.vpawesomewidgets' //YOUR PACKAGE NAME FROM BINTRAY ACCOUNT
+        desc = 'Awesome Spinner and Awesome AutoCompleteTextView. Fully customized and easy to use' // YOUR LIBRARY DESCRIPTION
+        websiteUrl = 'https://github.com/VrUnd14/VPAwesomeWidgets' // YOUR SITE
+        vcsUrl = 'https://github.com/VrUnd14/VPAwesomeWidgets.git' // YOUR GIT REPO
+        licenses = ["Apache-2.0"] // A LIST OF YOUR LICENCES
+        publish = true
+        publicDownloadNumbers = true
+    }
+}
