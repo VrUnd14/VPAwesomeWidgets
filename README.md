@@ -7,6 +7,12 @@ Currently this library includes following Awesome Widgets.
 * VPAutoCompleteTextView
 * VPSpinner
 
+### Demo
+<div align="left">
+   <img src="Screenshots/Screenshot_20200821-115823_VPAwesomeWidgetsSample.jpg" width="420px" height="800" hspace="20"</img>
+   <img src="Screenshots/myawesomapp.gif" width="420px" height="800"</img>
+</div>
+
 ## Getting Started
 
 ### Install
@@ -48,7 +54,6 @@ vpDrop.itemClickListener = object : VPAutoCompleteTextView.OnItemClickListener {
  
 | Attributes | Type | Default | Description |
 |------------|------|---------|-------------|
-| act_cornerRadius | dimension | 5dp | sets corner radius of widget |
 | act_backColor | color | #f1f1f1 | sets background color of widget |
 | act_hasBorder | boolean | true | sets border visivility of widget |
 | act_hasLabel | boolean | true | sets label visibility of widget |
@@ -94,7 +99,6 @@ vpSpinner.itemSelectedListener = object : VPSpinner.OnItemSelectedListener {
  
 | Attributes | Type | Default | Description |
 |------------|------|---------|-------------|
-| sp_cornerRadius | dimension | 5dp | sets corner radius of widget |
 | sp_backColor | color | #f1f1f1 | sets background color of widget |
 | sp_hasBorder | boolean | true | sets border visivility of widget |
 | sp_hasLabel | boolean | true | sets label visibility of widget |
