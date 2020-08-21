@@ -20,13 +20,12 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
 
     private val mContext = context
 
-    private var cornerRadius = dpToPx(5F)
     private var backColor = 0xFFF1F1F1.toInt()
     private var hasBorder = true
 
     private var hasLabel = true
     private var labelText = ""
-    private var labelTextSize = 14
+    private var labelTextSize = spToPx(14F)
     private var labelTextColor = 0xFF666666.toInt()
 
     private var dropSize = dpToPx(36F)
@@ -39,7 +38,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
     private var text = ""
     private var hintColor = 0xFF808080.toInt()
     private var textColor = 0xFF666666.toInt()
-    private var textSize = 14
+    private var textSize = spToPx(14F)
     private var textStyle = 0
     private var threshold = 1
 
@@ -49,7 +48,6 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
         View.inflate(mContext, R.layout.vp_awesome_widget, this)
         val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPAutoCompleteTextView)
 
-        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_cornerRadius, cornerRadius)
         backColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_backColor, backColor)
         hasBorder = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_hasBorder, hasBorder)
 
@@ -90,12 +88,11 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
         // Main
         val mainGD = vpParentLayout.background as GradientDrawable
         mainGD.setColor(backColor)
-        mainGD.cornerRadius = cornerRadius.toFloat()
         if (hasBorder)
             mainGD.setStroke(1, tinColor)
         else
             mainGD.setStroke(0, tinColor)
-
+        vpParentLayout.background = mainGD
         // Label
         if (hasLabel) {
             vpLabel.visibility = View.VISIBLE
@@ -108,15 +105,13 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
         }
         vpLabel.text = labelText
         vpLabel.setTextColor(labelTextColor)
-        vpLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, labelTextSize.toFloat())
+        vpLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, labelTextSize.toFloat())
         val labelGD = vpLabel.background as GradientDrawable
-        labelGD.cornerRadii = floatArrayOf(cornerRadius.toFloat(), cornerRadius.toFloat(), 0f, 0f, 0f, 0f, cornerRadius.toFloat(), cornerRadius.toFloat())
         labelGD.setColor(tinColor)
         curveImg.setColorFilter(tinColor, PorterDuff.Mode.SRC_ATOP)
 
         // Drop
         val dropGD = vpDropFrame.background as GradientDrawable
-        dropGD.cornerRadii = floatArrayOf(0f, 0f, cornerRadius.toFloat(), cornerRadius.toFloat(), cornerRadius.toFloat(), cornerRadius.toFloat(), 0f, 0f)
         val params = vpDropFrame.layoutParams
         params.width = dropSize
         vpDropFrame.layoutParams = params
@@ -129,18 +124,9 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
         vpAutoText.setText(text)
         vpAutoText.setHintTextColor(hintColor)
         vpAutoText.setTextColor(textColor)
-        vpAutoText.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
+        vpAutoText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
         vpAutoText.setTypeface(vpAutoText.typeface, textStyle)
         vpAutoText.threshold = threshold
-    }
-
-    fun setCorners(corner: Int) {
-        cornerRadius = corner
-        updateUI()
-    }
-
-    fun getCorners(): Int {
-        return cornerRadius
     }
 
     fun setBackColor(color: Int) {
@@ -302,6 +288,10 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
 
     private fun dpToPx(dp: Float): Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mContext.resources.displayMetrics).toInt()
+    }
+
+    private fun spToPx(sp: Float): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, mContext.resources.displayMetrics).toInt()
     }
 
     interface OnItemClickListener {

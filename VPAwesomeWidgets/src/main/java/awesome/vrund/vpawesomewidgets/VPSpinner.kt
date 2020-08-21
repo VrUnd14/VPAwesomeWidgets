@@ -19,13 +19,13 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     private val mContext = context
 
-    private var cornerRadius = dpToPx(5F)
+//    private var cornerRadius = dpToPx(5F)
     private var backColor = 0xFFF1F1F1.toInt()
     private var hasBorder = true
 
     private var hasLabel = true
     private var labelText = ""
-    private var labelTextSize = 14
+    private var labelTextSize = spToPx(14F)
     private var labelTextColor = 0xFF666666.toInt()
 
     private var dropSize = dpToPx(36F)
@@ -44,7 +44,7 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         View.inflate(mContext, R.layout.vp_awesome_widget, this)
         val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPSpinner)
 
-        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_cornerRadius, cornerRadius)
+//        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_cornerRadius, cornerRadius)
         backColor = parent.getColor(R.styleable.VPSpinner_sp_backColor, backColor)
         hasBorder = parent.getBoolean(R.styleable.VPSpinner_sp_hasBorder, hasBorder)
 
@@ -80,7 +80,7 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         // Main
         val mainGD = vpParentLayout.background as GradientDrawable
         mainGD.setColor(backColor)
-        mainGD.cornerRadius = cornerRadius.toFloat()
+//        mainGD.cornerRadius = cornerRadius.toFloat()
         if (hasBorder)
             mainGD.setStroke(1, tinColor)
         else
@@ -98,15 +98,15 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         }
         vpLabel.text = labelText
         vpLabel.setTextColor(labelTextColor)
-        vpLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, labelTextSize.toFloat())
+        vpLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, labelTextSize.toFloat())
         val labelGD = vpLabel.background as GradientDrawable
-        labelGD.cornerRadii = floatArrayOf(cornerRadius.toFloat(), cornerRadius.toFloat(), 0f, 0f, 0f, 0f, cornerRadius.toFloat(), cornerRadius.toFloat())
+//        labelGD.cornerRadii = floatArrayOf(cornerRadius.toFloat(), cornerRadius.toFloat(), 0f, 0f, 0f, 0f, cornerRadius.toFloat(), cornerRadius.toFloat())
         labelGD.setColor(tinColor)
         curveImg.setColorFilter(tinColor, PorterDuff.Mode.SRC_ATOP)
 
         // Drop
         val dropGD = vpDropFrame.background as GradientDrawable
-        dropGD.cornerRadii = floatArrayOf(0f, 0f, cornerRadius.toFloat(), cornerRadius.toFloat(), cornerRadius.toFloat(), cornerRadius.toFloat(), 0f, 0f)
+//        dropGD.cornerRadii = floatArrayOf(0f, 0f, cornerRadius.toFloat(), cornerRadius.toFloat(), cornerRadius.toFloat(), cornerRadius.toFloat(), 0f, 0f)
         val params = vpDropFrame.layoutParams
         params.width = dropSize
         vpDropFrame.layoutParams = params
@@ -121,14 +121,14 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         vpSpinner.layoutParams = params
     }
 
-    fun setCorners(corner: Int) {
-        cornerRadius = corner
-        updateUI()
-    }
-
-    fun getCorners(): Int {
-        return cornerRadius
-    }
+//    fun setCorners(corner: Int) {
+//        cornerRadius = corner
+//        updateUI()
+//    }
+//
+//    fun getCorners(): Int {
+//        return cornerRadius
+//    }
 
     fun setBackColor(color: Int) {
         backColor = color
@@ -226,6 +226,10 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     private fun dpToPx(dp: Float): Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mContext.resources.displayMetrics).toInt()
+    }
+
+    private fun spToPx(sp: Float): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, mContext.resources.displayMetrics).toInt()
     }
 
     interface OnItemSelectedListener {

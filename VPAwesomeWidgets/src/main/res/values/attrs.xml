@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="VPAutoCompleteTextView">
-        <attr name="act_cornerRadius" format="dimension" />
         <attr name="act_backColor" format="color" />
         <attr name="act_hasBorder" format="boolean" />
 
@@ -29,7 +28,7 @@
     </declare-styleable>
 
     <declare-styleable name="VPSpinner">
-        <attr name="sp_cornerRadius" format="dimension" />
+<!--        <attr name="sp_cornerRadius" format="dimension" />-->
         <attr name="sp_backColor" format="color" />
         <attr name="sp_hasBorder" format="boolean" />
 

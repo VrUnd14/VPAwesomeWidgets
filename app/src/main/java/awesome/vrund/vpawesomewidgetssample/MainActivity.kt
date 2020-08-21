@@ -3,6 +3,7 @@ package awesome.vrund.vpawesomewidgetssample
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import awesome.vrund.vpawesomewidgets.VPAutoCompleteTextView
 import awesome.vrund.vpawesomewidgets.VPBaseAdapter
@@ -37,14 +38,25 @@ class MainActivity : AppCompatActivity(), VPAutoCompleteTextView.OnItemClickList
 //            map["code"] = j.optString("code")
 //            countries.add(map)
 //        }
-        val adp = VPBaseAdapter(context, countries)
-//        adp.setFilterTag("name")
-        countriesDrop.setAdapter(adp)
-        countriesDrop.itemClickListener = this
 
-        val adp1 = VPBaseAdapter(context, countries)
-        countriesSpn.setAdapter(adp1)
-        countriesSpn.itemSelectedListener = this
+
+        val spinnerAdp = ArrayAdapter<CountryModel>(context, android.R.layout.simple_list_item_1, countries)
+        countriesSpn1.setAdapter(spinnerAdp)
+        countriesSpn1.itemSelectedListener = this
+        countriesSpn2.setAdapter(spinnerAdp)
+        countriesSpn2.itemSelectedListener = this
+        countriesSpn3.setAdapter(spinnerAdp)
+        countriesSpn3.itemSelectedListener = this
+        countriesSpn4.setAdapter(spinnerAdp)
+        countriesSpn4.itemSelectedListener = this
+
+        val dropAdp = ArrayAdapter<CountryModel>(context, android.R.layout.simple_list_item_1, countries)
+        countriesDrop1.setAdapter(dropAdp)
+        countriesDrop1.itemClickListener = this
+
+        val myDropAdp = VPBaseAdapter(context, countries)
+        countriesDrop2.setAdapter(myDropAdp)
+        countriesDrop2.itemClickListener = this
     }
 
     private fun loadJSONFromAsset(): JSONObject? {
@@ -63,14 +75,10 @@ class MainActivity : AppCompatActivity(), VPAutoCompleteTextView.OnItemClickList
     }
 
     override fun onItemClick(view: VPAutoCompleteTextView, position: Int) {
-        if (view.id == R.id.countriesDrop) {
-            Log.e("jvbadjbv", view.getAdapter()!!.getItem(position).toString())
-        }
+        Toast.makeText(context, view.getAdapter()!!.getItem(position).toString(), Toast.LENGTH_SHORT).show()
     }
 
     override fun onItemSelected(view: VPSpinner, selectedItem: Any?, position: Int) {
-        if (view.id == R.id.countriesSpn) {
-            Toast.makeText(context, selectedItem.toString(), Toast.LENGTH_SHORT).show()
-        }
+        Toast.makeText(context, selectedItem.toString(), Toast.LENGTH_SHORT).show()
     }
 }
