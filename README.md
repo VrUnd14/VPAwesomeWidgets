@@ -10,10 +10,10 @@ Currently this library includes following Awesome Widgets.
 ### Demo
  <div class="row">
   <div class="column">
-    <img src="Screenshots/Screenshot_20200821-115823_VPAwesomeWidgetsSample.jpg" width="380px" height="720px">
+    <img src="Screenshots/Screenshot_20200821-115823_VPAwesomeWidgetsSample.jpg" width="180px" height="720px">
   </div>
   <div class="column">
-    <img src="Screenshots/myawesomapp.gif" width="380px" height="720px" hspace="10px"</img>
+    <img src="Screenshots/myawesomapp.gif" width="180px" height="720px" hspace="10px"</img>
   </div>
 </div>
 
