@@ -8,9 +8,13 @@ Currently this library includes following Awesome Widgets.
 * VPSpinner
 
 ### Demo
-<div align="left">
-   <img src="Screenshots/Screenshot_20200821-115823_VPAwesomeWidgetsSample.jpg" width="420px" height="800"</img>
-   <img src="Screenshots/myawesomapp.gif" width="420px" height="800" hspace="20"</img>
+ <div class="row">
+  <div class="column">
+    <img src="Screenshots/Screenshot_20200821-115823_VPAwesomeWidgetsSample.jpg" width="420px" height="800">
+  </div>
+  <div class="column">
+    <img src="Screenshots/myawesomapp.gif" width="420px" height="800" hspace="20"</img>
+  </div>
 </div>
 
 ## Getting Started
