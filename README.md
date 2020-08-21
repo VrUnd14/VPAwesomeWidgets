@@ -9,8 +9,8 @@ Currently this library includes following Awesome Widgets.
 
 ### Demo
 <div align="left">
-   <img src="Screenshots/Screenshot_20200821-115823_VPAwesomeWidgetsSample.jpg" width="420px" height="800" hspace="20"</img>
-   <img src="Screenshots/myawesomapp.gif" width="420px" height="800"</img>
+   <img src="Screenshots/Screenshot_20200821-115823_VPAwesomeWidgetsSample.jpg" width="420px" height="800"</img>
+   <img src="Screenshots/myawesomapp.gif" width="420px" height="800" hspace="20"</img>
 </div>
 
 ## Getting Started
