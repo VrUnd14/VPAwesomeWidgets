@@ -18,7 +18,7 @@ Currently this library includes following Awesome Widgets.
 ### Install
 ```gradle
 dependencies {
-   implementation 'awesome.vrund.vpawesomewidgets:VPAwesomeWidgets:1.0.2'
+   implementation 'awesome.vrund.vpawesomewidgets:VPAwesomeWidgets:1.0.3'
 }
 ```
 
