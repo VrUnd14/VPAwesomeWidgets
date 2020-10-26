@@ -28,7 +28,7 @@
     </declare-styleable>
 
     <declare-styleable name="VPSpinner">
-<!--        <attr name="sp_cornerRadius" format="dimension" />-->
+        <attr name="sp_cornerRadius" format="dimension" />
         <attr name="sp_backColor" format="color" />
         <attr name="sp_hasBorder" format="boolean" />
 

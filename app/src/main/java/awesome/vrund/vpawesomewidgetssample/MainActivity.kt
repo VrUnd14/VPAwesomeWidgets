@@ -1,5 +1,6 @@
 package awesome.vrund.vpawesomewidgetssample
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity(), VPAutoCompleteTextView.OnItemClickList
         countriesSpn3.itemSelectedListener = this
         countriesSpn4.setAdapter(spinnerAdp)
         countriesSpn4.itemSelectedListener = this
+        countriesSpn4.setCorners(15)
 
         val dropAdp = ArrayAdapter<CountryModel>(context, android.R.layout.simple_list_item_1, countries)
         countriesDrop1.setAdapter(dropAdp)

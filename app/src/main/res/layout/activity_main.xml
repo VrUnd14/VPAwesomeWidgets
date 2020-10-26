@@ -109,4 +109,10 @@
         app:sp_dropSize="48dp"
         app:sp_hasLabel="false"
         app:sp_tint="@color/colorAccent" />
+
+    <awesome.vrund.vpawesomewidgets.VPSpinnerNew
+        android:id="@+id/countriesSpn5"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp" />
 </LinearLayout>

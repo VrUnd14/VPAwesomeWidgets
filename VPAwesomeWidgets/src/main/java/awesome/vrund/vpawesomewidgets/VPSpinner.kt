@@ -19,7 +19,7 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     private val mContext = context
 
-//    private var cornerRadius = dpToPx(5F)
+    private var cornerRadius = dpToPx(5F)
     private var backColor = 0xFFF1F1F1.toInt()
     private var hasBorder = true
 
@@ -44,7 +44,7 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         View.inflate(mContext, R.layout.vp_awesome_widget, this)
         val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPSpinner)
 
-//        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_cornerRadius, cornerRadius)
+        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_cornerRadius, cornerRadius)
         backColor = parent.getColor(R.styleable.VPSpinner_sp_backColor, backColor)
         hasBorder = parent.getBoolean(R.styleable.VPSpinner_sp_hasBorder, hasBorder)
 
@@ -121,14 +121,14 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         vpSpinner.layoutParams = params
     }
 
-//    fun setCorners(corner: Int) {
-//        cornerRadius = corner
-//        updateUI()
-//    }
-//
-//    fun getCorners(): Int {
-//        return cornerRadius
-//    }
+    fun setCorners(corner: Int) {
+        cornerRadius = corner
+        updateUI()
+    }
+
+    fun getCorners(): Int {
+        return cornerRadius
+    }
 
     fun setBackColor(color: Int) {
         backColor = color
@@ -214,6 +214,14 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun getTint(): Int {
         return tinColor
+    }
+
+    fun setSelection(position: Int) {
+        vpSpinner.setSelection(position)
+    }
+
+    fun getSelectedPosition(): Int {
+        return vpSpinner.selectedItemPosition
     }
 
     fun <T> setAdapter(adapter: T) where T : SpinnerAdapter?, T : Filterable? {
