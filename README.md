@@ -7,12 +7,18 @@ Currently this library includes following Awesome Widgets.
 * VPAutoCompleteTextView
 * VPSpinner
 
+### Demo
+<p float="left">
+  <img src="Screenshots/Screenshot_20200821-115823_VPAwesomeWidgetsSample.jpg" width="320px" height="600px">
+  <img src="Screenshots/myawesomapp.gif" width="320px" height="600px" hspace="10px"</img>
+</p>
+
 ## Getting Started
 
 ### Install
 ```gradle
 dependencies {
-   implementation 'awesome.vrund.vpawesomewidgets:VPAwesomeWidgets:1.0.2'
+   implementation 'awesome.vrund.vpawesomewidgets:VPAwesomeWidgets:1.0.3'
 }
 ```
 
@@ -48,7 +54,6 @@ vpDrop.itemClickListener = object : VPAutoCompleteTextView.OnItemClickListener {
  
 | Attributes | Type | Default | Description |
 |------------|------|---------|-------------|
-| act_cornerRadius | dimension | 5dp | sets corner radius of widget |
 | act_backColor | color | #f1f1f1 | sets background color of widget |
 | act_hasBorder | boolean | true | sets border visivility of widget |
 | act_hasLabel | boolean | true | sets label visibility of widget |
@@ -94,7 +99,6 @@ vpSpinner.itemSelectedListener = object : VPSpinner.OnItemSelectedListener {
  
 | Attributes | Type | Default | Description |
 |------------|------|---------|-------------|
-| sp_cornerRadius | dimension | 5dp | sets corner radius of widget |
 | sp_backColor | color | #f1f1f1 | sets background color of widget |
 | sp_hasBorder | boolean | true | sets border visivility of widget |
 | sp_hasLabel | boolean | true | sets label visibility of widget |
