@@ -20,6 +20,7 @@
         <attr name="act_hintColor" format="color" />
         <attr name="act_textColor" format="color" />
         <attr name="act_textSize" format="dimension" />
+        <attr name="act_textAllCaps" format="boolean" />
         <attr name="act_textStyle" format="enum">
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />

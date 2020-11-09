@@ -57,6 +57,7 @@
         app:act_hasLabel="true"
         app:act_hint="Select Country"
         app:act_labelText="Countries"
+        app:act_textAllCaps="true"
         app:act_labelTextColor="@android:color/white"
         app:act_tint="#c1450b" />
 
@@ -109,10 +110,4 @@
         app:sp_dropSize="48dp"
         app:sp_hasLabel="false"
         app:sp_tint="@color/colorAccent" />
-
-    <awesome.vrund.vpawesomewidgets.VPSpinnerNew
-        android:id="@+id/countriesSpn5"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="10dp" />
 </LinearLayout>

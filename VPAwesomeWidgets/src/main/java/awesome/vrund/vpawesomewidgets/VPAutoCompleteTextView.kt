@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.text.InputFilter
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -15,8 +16,12 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 
-class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-        RelativeLayout(context, attrs, defStyleAttr) {
+class VPAutoCompleteTextView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) :
+    RelativeLayout(context, attrs, defStyleAttr) {
 
     private val mContext = context
 
@@ -35,6 +40,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
     private var tinColor = 0xFFc3c3c3.toInt()
 
     private var hint = ""
+    private var textAllCaps = false
     private var text = ""
     private var hintColor = 0xFF808080.toInt()
     private var textColor = 0xFF666666.toInt()
@@ -53,13 +59,26 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
 
         hasLabel = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_hasLabel, hasLabel)
         if (parent.hasValue(R.styleable.VPAutoCompleteTextView_act_labelText))
-            labelText = parent.getString(R.styleable.VPAutoCompleteTextView_act_labelText).toString()
-        labelTextSize = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_labelTextSize, labelTextSize)
-        labelTextColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_labelTextColor, labelTextColor)
+            labelText =
+                parent.getString(R.styleable.VPAutoCompleteTextView_act_labelText).toString()
+        labelTextSize = parent.getDimensionPixelSize(
+            R.styleable.VPAutoCompleteTextView_act_labelTextSize,
+            labelTextSize
+        )
+        labelTextColor =
+            parent.getColor(R.styleable.VPAutoCompleteTextView_act_labelTextColor, labelTextColor)
 
-        dropSize = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_dropSize, dropSize)
-        dropIcon = ContextCompat.getDrawable(mContext, parent.getResourceId(R.styleable.VPAutoCompleteTextView_act_dropIcon, R.drawable.vp_drop_icon))
-        dropIconTint = parent.getColor(R.styleable.VPAutoCompleteTextView_act_dropIconTint, dropIconTint)
+        dropSize =
+            parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_dropSize, dropSize)
+        dropIcon = ContextCompat.getDrawable(
+            mContext,
+            parent.getResourceId(
+                R.styleable.VPAutoCompleteTextView_act_dropIcon,
+                R.drawable.vp_drop_icon
+            )
+        )
+        dropIconTint =
+            parent.getColor(R.styleable.VPAutoCompleteTextView_act_dropIconTint, dropIconTint)
 
         tinColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_tint, tinColor)
 
@@ -68,9 +87,12 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
             hint = parent.getString(R.styleable.VPAutoCompleteTextView_act_hint).toString()
         if (parent.hasValue(R.styleable.VPAutoCompleteTextView_act_text))
             text = parent.getString(R.styleable.VPAutoCompleteTextView_act_text).toString()
+        textAllCaps =
+            parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_textAllCaps, textAllCaps)
         hintColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_hintColor, hintColor)
         textColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_textColor, textColor)
-        textSize = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_textSize, textSize)
+        textSize =
+            parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_textSize, textSize)
         textStyle = parent.getInt(R.styleable.VPAutoCompleteTextView_act_textStyle, textStyle)
 
         parent.recycle()
@@ -127,6 +149,10 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
         vpAutoText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
         vpAutoText.setTypeface(vpAutoText.typeface, textStyle)
         vpAutoText.threshold = threshold
+        if (textAllCaps)
+            vpAutoText.filters = arrayOf(InputFilter.AllCaps())
+        else
+            vpAutoText.filters = arrayOf()
     }
 
     fun setBackColor(color: Int) {
@@ -215,6 +241,11 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
         return tinColor
     }
 
+    fun setAllCaps(flag: Boolean) {
+        this.textAllCaps = flag
+        updateUI()
+    }
+
     fun setHint(hint: String) {
         this.hint = hint
         updateUI()
@@ -287,18 +318,27 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
     }
 
     private fun dpToPx(dp: Float): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mContext.resources.displayMetrics).toInt()
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            mContext.resources.displayMetrics
+        ).toInt()
     }
 
     private fun spToPx(sp: Float): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, mContext.resources.displayMetrics).toInt()
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            sp,
+            mContext.resources.displayMetrics
+        ).toInt()
     }
 
     interface OnItemClickListener {
         fun onItemClick(view: VPAutoCompleteTextView, position: Int)
     }
 
-    inner class MyItemClickListener(myAc: VPAutoCompleteTextView) : AdapterView.OnItemClickListener {
+    inner class MyItemClickListener(myAc: VPAutoCompleteTextView) :
+        AdapterView.OnItemClickListener {
 
         private var ac: VPAutoCompleteTextView = myAc
 
