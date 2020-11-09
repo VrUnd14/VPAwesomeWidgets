@@ -65,6 +65,7 @@ vpDrop.itemClickListener = object : VPAutoCompleteTextView.OnItemClickListener {
 | act_dropIconTint | color | #666666 | sets dropdown icon color of widget |
 | act_tint | color | #c3c3c3 | sets tint color of widget |
 | act_hint | String | null | sets hint of widget |
+| act_textAllCaps | boolean | false | sets input type to all capital laters |
 | act_text | String | null | sets text of widget |
 | act_hintColor | color | default | sets hint color of widget |
 | act_textColor | color | default | sets text color of widget |
