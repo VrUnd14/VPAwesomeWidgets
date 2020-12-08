@@ -111,11 +111,9 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
 
     private fun updateUI() {
 
-        tinColor = tinColor.takeIf { enable } ?: ColorUtils.blendARGB(tinColor, Color.WHITE,0.6f)
-        labelTextColor = labelTextColor.takeIf { enable } ?: ColorUtils.blendARGB(labelTextColor, Color.WHITE,0.5f)
-        dropIconTint = dropIconTint.takeIf { enable } ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE,0.5f)
-        hintColor = hintColor.takeIf { enable } ?: ColorUtils.blendARGB(hintColor, Color.WHITE,0.5f)
-        textColor = textColor.takeIf { enable } ?: ColorUtils.blendARGB(textColor, Color.WHITE,0.5f)
+        val tinColor = tinColor.takeIf { enable } ?: ColorUtils.blendARGB(tinColor, Color.WHITE,0.6f)
+        val labelTextColor = labelTextColor.takeIf { enable } ?: ColorUtils.blendARGB(labelTextColor, Color.WHITE,0.5f)
+        val dropIconTint = dropIconTint.takeIf { enable } ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE,0.5f)
 
         // Main
         val mainGD = vpParentLayout.background as GradientDrawable
