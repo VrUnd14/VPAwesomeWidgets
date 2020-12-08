@@ -8,10 +8,7 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
-import android.widget.AdapterView
-import android.widget.Filterable
-import android.widget.RelativeLayout
-import android.widget.SpinnerAdapter
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
@@ -248,7 +245,7 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         vpSpinner.adapter = adapter
     }
 
-    fun getAdapter(): SpinnerAdapter? {
+    fun getAdapter(): Adapter? {
         return vpSpinner.adapter
     }
 

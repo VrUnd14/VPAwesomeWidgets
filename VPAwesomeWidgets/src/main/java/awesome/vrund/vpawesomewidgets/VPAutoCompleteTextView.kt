@@ -10,10 +10,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.Filterable
-import android.widget.ListAdapter
-import android.widget.RelativeLayout
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
@@ -333,7 +330,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
         vpAutoText.setAdapter(adapter)
     }
 
-    fun getAdapter(): ListAdapter? {
+    fun getAdapter(): Adapter? {
         return vpAutoText.adapter
     }
 
