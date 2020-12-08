@@ -14,6 +14,7 @@
         <attr name="act_dropIconTint" format="color" />
 
         <attr name="act_tint" format="color" />
+        <attr name="act_enable" format="boolean" />
 
         <attr name="act_hint" format="string" />
         <attr name="act_text" format="string" />
@@ -43,5 +44,6 @@
         <attr name="sp_dropIconTint" format="color" />
 
         <attr name="sp_tint" format="color" />
+        <attr name="sp_enable" format="boolean" />
     </declare-styleable>
 </resources>

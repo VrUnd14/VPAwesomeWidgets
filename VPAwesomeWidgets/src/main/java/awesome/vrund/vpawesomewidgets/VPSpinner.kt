@@ -1,6 +1,7 @@
 package awesome.vrund.vpawesomewidgets
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -12,6 +13,7 @@ import android.widget.Filterable
 import android.widget.RelativeLayout
 import android.widget.SpinnerAdapter
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 
 class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
@@ -33,6 +35,7 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     private var dropIconTint = 0xFF666666.toInt()
 
     private var tinColor = 0xFFc3c3c3.toInt()
+    private var enable = true
 
     var itemSelectedListener: OnItemSelectedListener? = null
 
@@ -59,6 +62,7 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         dropIconTint = parent.getColor(R.styleable.VPSpinner_sp_dropIconTint, dropIconTint)
 
         tinColor = parent.getColor(R.styleable.VPSpinner_sp_tint, tinColor)
+        enable = parent.getBoolean(R.styleable.VPSpinner_sp_enable, enable)
         parent.recycle()
 
         vpSpinner.visibility = View.VISIBLE
@@ -76,6 +80,10 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     private fun updateUI() {
+
+        tinColor = tinColor.takeIf { enable } ?: ColorUtils.blendARGB(tinColor, Color.WHITE,0.6f)
+        labelTextColor = labelTextColor.takeIf { enable } ?: ColorUtils.blendARGB(labelTextColor, Color.WHITE,0.5f)
+        dropIconTint = dropIconTint.takeIf { enable } ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE,0.5f)
 
         // Main
         val mainGD = vpParentLayout.background as GradientDrawable
@@ -113,6 +121,9 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         vpDropIcon.setImageDrawable(dropIcon)
         vpDropIcon.setColorFilter(dropIconTint, PorterDuff.Mode.SRC_ATOP)
         dropGD.setColor(tinColor)
+
+        vpSpinner.isEnabled = enable
+        vpDropFrame.isEnabled = enable
     }
 
     private fun setSpinnerLeftMargin(margin: Float) {
@@ -222,6 +233,15 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun getSelectedPosition(): Int {
         return vpSpinner.selectedItemPosition
+    }
+
+    fun setEnable(enable: Boolean) {
+        this.enable = enable
+        updateUI()
+    }
+
+    fun isEnable(): Boolean {
+        return enable
     }
 
     fun <T> setAdapter(adapter: T) where T : SpinnerAdapter?, T : Filterable? {

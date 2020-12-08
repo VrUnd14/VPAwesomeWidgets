@@ -1,6 +1,7 @@
 package awesome.vrund.vpawesomewidgets
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -14,6 +15,7 @@ import android.widget.Filterable
 import android.widget.ListAdapter
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 
 class VPAutoCompleteTextView @JvmOverloads constructor(
@@ -38,6 +40,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
     private var dropIconTint = 0xFF666666.toInt()
 
     private var tinColor = 0xFFc3c3c3.toInt()
+    private var enable = true
 
     private var hint = ""
     private var textAllCaps = false
@@ -81,6 +84,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
             parent.getColor(R.styleable.VPAutoCompleteTextView_act_dropIconTint, dropIconTint)
 
         tinColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_tint, tinColor)
+        enable = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_enable, enable)
 
         vpAutoText.visibility = View.VISIBLE
         if (parent.hasValue(R.styleable.VPAutoCompleteTextView_act_hint))
@@ -106,6 +110,12 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
     }
 
     private fun updateUI() {
+
+        tinColor = tinColor.takeIf { enable } ?: ColorUtils.blendARGB(tinColor, Color.WHITE,0.6f)
+        labelTextColor = labelTextColor.takeIf { enable } ?: ColorUtils.blendARGB(labelTextColor, Color.WHITE,0.5f)
+        dropIconTint = dropIconTint.takeIf { enable } ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE,0.5f)
+        hintColor = hintColor.takeIf { enable } ?: ColorUtils.blendARGB(hintColor, Color.WHITE,0.5f)
+        textColor = textColor.takeIf { enable } ?: ColorUtils.blendARGB(textColor, Color.WHITE,0.5f)
 
         // Main
         val mainGD = vpParentLayout.background as GradientDrawable
@@ -153,6 +163,9 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
             vpAutoText.filters = arrayOf(InputFilter.AllCaps())
         else
             vpAutoText.filters = arrayOf()
+
+        vpAutoText.isEnabled = enable
+        vpDropFrame.isEnabled = enable
     }
 
     fun setBackColor(color: Int) {
@@ -307,6 +320,15 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
 
     fun getThreshold(): Int {
         return threshold
+    }
+
+    fun setEnable(enable: Boolean) {
+        this.enable = enable
+        updateUI()
+    }
+
+    fun isEnable(): Boolean {
+        return enable
     }
 
     fun <T> setAdapter(adapter: T) where T : ListAdapter?, T : Filterable? {
