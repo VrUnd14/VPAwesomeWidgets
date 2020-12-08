@@ -1,7 +1,7 @@
 # VPAwesomeWidgets
 Awesome Spinner and Awesome AutoCompleteTextView. Fully customized and easy to use
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Supported Version](https://img.shields.io/badge/Android-4.2%2B-green)](https://github.com/gomods/athens)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Supported Version](https://img.shields.io/badge/Android-4.2%2B-green)](https://github.com/gomods/athens) [ ![Download](https://api.bintray.com/packages/vrund14/VPAwesomeWidgets/awesome.vrund.vpawesomewidgets/images/download.svg) ](https://bintray.com/vrund14/VPAwesomeWidgets/awesome.vrund.vpawesomewidgets/_latestVersion)
 
 Currently this library includes following Awesome Widgets.
 * VPAutoCompleteTextView
@@ -18,7 +18,7 @@ Currently this library includes following Awesome Widgets.
 ### Install
 ```gradle
 dependencies {
-   implementation 'awesome.vrund.vpawesomewidgets:VPAwesomeWidgets:1.0.3'
+   implementation 'awesome.vrund.vpawesomewidgets:VPAwesomeWidgets:1.0.5'
 }
 ```
 
@@ -65,6 +65,7 @@ vpDrop.itemClickListener = object : VPAutoCompleteTextView.OnItemClickListener {
 | act_dropIconTint | color | #666666 | sets dropdown icon color of widget |
 | act_tint | color | #c3c3c3 | sets tint color of widget |
 | act_hint | String | null | sets hint of widget |
+| act_textAllCaps | boolean | false | sets input type to all capital laters |
 | act_text | String | null | sets text of widget |
 | act_hintColor | color | default | sets hint color of widget |
 | act_textColor | color | default | sets text color of widget |
