@@ -39,6 +39,8 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
     private var tinColor = 0xFFc3c3c3.toInt()
     private var enable = true
 
+    private var defaultArray: Array<String>? = null
+
     private var hint = ""
     private var textAllCaps = false
     private var text = ""
@@ -82,6 +84,11 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
 
         tinColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_tint, tinColor)
         enable = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_enable, enable)
+
+        if (parent.hasValue(R.styleable.VPAutoCompleteTextView_act_array)) {
+            val arrayID: Int = parent.getResourceId(R.styleable.VPAutoCompleteTextView_act_array, 0)
+            defaultArray = parent.resources.getStringArray(arrayID)
+        }
 
         vpAutoText.visibility = View.VISIBLE
         if (parent.hasValue(R.styleable.VPAutoCompleteTextView_act_hint))
@@ -161,6 +168,11 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
 
         vpAutoText.isEnabled = enable
         vpDropFrame.isEnabled = enable
+
+        if (defaultArray != null) {
+            val adp = ArrayAdapter<String>(mContext, R.layout.vp_drop_item, R.id.txt, defaultArray!!)
+            vpAutoText.setAdapter(adp)
+        }
     }
 
     fun setBackColor(color: Int) {

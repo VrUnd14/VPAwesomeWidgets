@@ -28,6 +28,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
         app:act_hasLabel="true"
+        app:act_array="@array/test"
         app:act_hint="Select Country"
         app:act_labelText="Countries"
         app:act_tint="#00ff00" />
@@ -76,6 +77,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="15dp"
         app:sp_hasLabel="true"
+        app:sp_array="@array/test"
         app:sp_labelText="Countries" />
 
     <awesome.vrund.vpawesomewidgets.VPSpinner

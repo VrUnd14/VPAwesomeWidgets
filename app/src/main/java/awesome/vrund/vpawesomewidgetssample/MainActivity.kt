@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), VPAutoCompleteTextView.OnItemClickList
 
 
         val spinnerAdp = ArrayAdapter<CountryModel>(context, android.R.layout.simple_list_item_1, countries)
-        countriesSpn1.setAdapter(spinnerAdp)
+//        countriesSpn1.setAdapter(spinnerAdp)
         countriesSpn1.itemSelectedListener = this
         countriesSpn2.setAdapter(spinnerAdp)
         countriesSpn2.itemSelectedListener = this
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity(), VPAutoCompleteTextView.OnItemClickList
         countriesSpn4.setCorners(15)
 
         val dropAdp = ArrayAdapter<CountryModel>(context, android.R.layout.simple_list_item_1, countries)
-        countriesDrop1.setAdapter(dropAdp)
+//        countriesDrop1.setAdapter(dropAdp)
         countriesDrop1.itemClickListener = this
 
         val myDropAdp = VPBaseAdapter(context, countries)

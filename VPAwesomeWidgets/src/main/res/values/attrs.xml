@@ -15,6 +15,7 @@
 
         <attr name="act_tint" format="color" />
         <attr name="act_enable" format="boolean" />
+        <attr name="act_array" format="reference" />
 
         <attr name="act_hint" format="string" />
         <attr name="act_text" format="string" />
@@ -45,5 +46,6 @@
 
         <attr name="sp_tint" format="color" />
         <attr name="sp_enable" format="boolean" />
+        <attr name="sp_array" format="reference" />
     </declare-styleable>
 </resources>

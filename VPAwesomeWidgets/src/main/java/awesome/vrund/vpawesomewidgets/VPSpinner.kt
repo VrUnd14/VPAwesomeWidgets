@@ -13,8 +13,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 
-class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-        RelativeLayout(context, attrs, defStyleAttr) {
+class VPSpinner @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) :
+    RelativeLayout(context, attrs, defStyleAttr) {
 
     private val mContext = context
 
@@ -34,6 +38,8 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     private var tinColor = 0xFFc3c3c3.toInt()
     private var enable = true
 
+    private var defaultArray: Array<String>? = null
+
     var itemSelectedListener: OnItemSelectedListener? = null
 
     fun getView(): VPSpinner {
@@ -44,29 +50,45 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         View.inflate(mContext, R.layout.vp_awesome_widget, this)
         val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPSpinner)
 
-        cornerRadius = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_cornerRadius, cornerRadius)
+        cornerRadius =
+            parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_cornerRadius, cornerRadius)
         backColor = parent.getColor(R.styleable.VPSpinner_sp_backColor, backColor)
         hasBorder = parent.getBoolean(R.styleable.VPSpinner_sp_hasBorder, hasBorder)
 
         hasLabel = parent.getBoolean(R.styleable.VPSpinner_sp_hasLabel, hasLabel)
         if (parent.hasValue(R.styleable.VPSpinner_sp_labelText))
             labelText = parent.getString(R.styleable.VPSpinner_sp_labelText).toString()
-        labelTextSize = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_labelTextSize, labelTextSize)
+        labelTextSize =
+            parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_labelTextSize, labelTextSize)
         labelTextColor = parent.getColor(R.styleable.VPSpinner_sp_labelTextColor, labelTextColor)
 
         dropSize = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_dropSize, dropSize)
-        dropIcon = ContextCompat.getDrawable(mContext, parent.getResourceId(R.styleable.VPSpinner_sp_dropIcon, R.drawable.vp_drop_icon))
+        dropIcon = ContextCompat.getDrawable(
+            mContext,
+            parent.getResourceId(R.styleable.VPSpinner_sp_dropIcon, R.drawable.vp_drop_icon)
+        )
         dropIconTint = parent.getColor(R.styleable.VPSpinner_sp_dropIconTint, dropIconTint)
 
         tinColor = parent.getColor(R.styleable.VPSpinner_sp_tint, tinColor)
         enable = parent.getBoolean(R.styleable.VPSpinner_sp_enable, enable)
+
+        if (parent.hasValue(R.styleable.VPSpinner_sp_array)) {
+            val arrayID: Int = parent.getResourceId(R.styleable.VPSpinner_sp_array, 0)
+            defaultArray = parent.resources.getStringArray(arrayID)
+        }
+
         parent.recycle()
 
         vpSpinner.visibility = View.VISIBLE
         vpSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val item = parent?.selectedItem
                 itemSelectedListener?.onItemSelected(getView(), item, position)
             }
@@ -78,9 +100,15 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     private fun updateUI() {
 
-        val tinColor = tinColor.takeIf { enable } ?: ColorUtils.blendARGB(tinColor, Color.WHITE,0.6f)
-        val labelTextColor = labelTextColor.takeIf { enable } ?: ColorUtils.blendARGB(labelTextColor, Color.WHITE,0.5f)
-        val dropIconTint = dropIconTint.takeIf { enable } ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE,0.5f)
+        val tinColor =
+            tinColor.takeIf { enable } ?: ColorUtils.blendARGB(tinColor, Color.WHITE, 0.6f)
+        val labelTextColor = labelTextColor.takeIf { enable } ?: ColorUtils.blendARGB(
+            labelTextColor,
+            Color.WHITE,
+            0.5f
+        )
+        val dropIconTint =
+            dropIconTint.takeIf { enable } ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE, 0.5f)
 
         // Main
         val mainGD = vpParentLayout.background as GradientDrawable
@@ -121,6 +149,11 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
         vpSpinner.isEnabled = enable
         vpDropFrame.isEnabled = enable
+
+        if (defaultArray != null) {
+            val adp = ArrayAdapter<String>(mContext, R.layout.vp_drop_item, R.id.txt, defaultArray!!)
+            vpSpinner.adapter = adp
+        }
     }
 
     private fun setSpinnerLeftMargin(margin: Float) {
@@ -250,11 +283,19 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     private fun dpToPx(dp: Float): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mContext.resources.displayMetrics).toInt()
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            mContext.resources.displayMetrics
+        ).toInt()
     }
 
     private fun spToPx(sp: Float): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, mContext.resources.displayMetrics).toInt()
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            sp,
+            mContext.resources.displayMetrics
+        ).toInt()
     }
 
     interface OnItemSelectedListener {
