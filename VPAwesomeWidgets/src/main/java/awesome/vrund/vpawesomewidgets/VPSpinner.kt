@@ -1,6 +1,7 @@
 package awesome.vrund.vpawesomewidgets
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
@@ -11,6 +12,7 @@ import android.view.View
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
+import androidx.core.widget.ImageViewCompat
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 
 class VPSpinner @JvmOverloads constructor(
@@ -135,7 +137,7 @@ class VPSpinner @JvmOverloads constructor(
         val labelGD = vpLabel.background as GradientDrawable
 //        labelGD.cornerRadii = floatArrayOf(cornerRadius.toFloat(), cornerRadius.toFloat(), 0f, 0f, 0f, 0f, cornerRadius.toFloat(), cornerRadius.toFloat())
         labelGD.setColor(tinColor)
-        curveImg.setColorFilter(tinColor, PorterDuff.Mode.SRC_ATOP)
+        ImageViewCompat.setImageTintList(curveImg, ColorStateList.valueOf(tinColor))
 
         // Drop
         val dropGD = vpDropFrame.background as GradientDrawable
