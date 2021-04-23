@@ -1,115 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="15dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="VPAutoCompleteTextView"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:padding="15dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(with normal adapter)"
-        android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VPAutoCompleteTextView"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <awesome.vrund.vpawesomewidgets.VPAutoCompleteTextView
-        android:id="@+id/countriesDrop1"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="15dp"
-        app:act_hasLabel="true"
-        app:act_array="@array/test"
-        app:act_hint="Select Country"
-        app:act_labelText="Countries"
-        app:act_tint="#00ff00" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(with normal adapter)"
+            android:textSize="14sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="VPAutoCompleteTextView"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <awesome.vrund.vpawesomewidgets.VPAutoCompleteTextView
+            android:id="@+id/countriesDrop1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            app:act_array="@array/test"
+            app:act_hasLabel="true"
+            app:act_hint="Select Country"
+            app:act_labelText="Countries"
+            app:act_tint="#00ff00" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(with VPBaseAdapterr)"
-        android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="VPAutoCompleteTextView"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <awesome.vrund.vpawesomewidgets.VPAutoCompleteTextView
-        android:id="@+id/countriesDrop2"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="15dp"
-        app:act_dropIconTint="@android:color/white"
-        app:act_dropSize="40dp"
-        app:act_hasLabel="true"
-        app:act_hint="Select Country"
-        app:act_labelText="Countries"
-        app:act_textAllCaps="true"
-        app:act_labelTextColor="@android:color/white"
-        app:act_tint="#c1450b" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(with VPBaseAdapterr)"
+            android:textSize="14sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="VPSpinner"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <awesome.vrund.vpawesomewidgets.VPAutoCompleteTextView
+            android:id="@+id/countriesDrop2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            app:act_dropIconTint="@android:color/white"
+            app:act_dropSize="40dp"
+            app:act_hasLabel="true"
+            app:act_hint="Select Country"
+            app:act_labelText="Countries"
+            app:act_labelTextColor="@android:color/white"
+            app:act_textAllCaps="true"
+            app:act_tint="#c1450b" />
 
-    <awesome.vrund.vpawesomewidgets.VPSpinner
-        android:id="@+id/countriesSpn1"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="15dp"
-        app:sp_hasLabel="true"
-        app:sp_array="@array/test"
-        app:sp_labelText="Countries" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="VPSpinner"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <awesome.vrund.vpawesomewidgets.VPSpinner
-        android:id="@+id/countriesSpn2"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        app:sp_dropIconTint="@android:color/white"
-        app:sp_hasLabel="false"
-        app:sp_tint="#ff0000" />
+        <awesome.vrund.vpawesomewidgets.VPSpinner
+            android:id="@+id/countriesSpn1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            app:sp_array="@array/test"
+            app:sp_hasLabel="true"
+            app:sp_labelText="Countries" />
 
-    <awesome.vrund.vpawesomewidgets.VPSpinner
-        android:id="@+id/countriesSpn3"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        app:sp_backColor="#e3e3e3"
-        app:sp_dropIconTint="@android:color/white"
-        app:sp_hasBorder="false"
-        app:sp_hasLabel="true"
-        app:sp_labelText="Countries"
-        app:sp_labelTextColor="@android:color/white"
-        app:sp_labelTextSize="16dp"
-        app:sp_tint="@color/colorPrimary" />
+        <awesome.vrund.vpawesomewidgets.VPSpinner
+            android:id="@+id/countriesSpn2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            app:sp_dropIconTint="@android:color/white"
+            app:sp_hasLabel="false"
+            app:sp_tint="#ff0000" />
 
-    <awesome.vrund.vpawesomewidgets.VPSpinner
-        android:id="@+id/countriesSpn4"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="10dp"
-        app:sp_dropIconTint="@android:color/white"
-        app:sp_dropSize="48dp"
-        app:sp_hasLabel="false"
-        app:sp_tint="@color/colorAccent" />
-</LinearLayout>
+        <awesome.vrund.vpawesomewidgets.VPSpinner
+            android:id="@+id/countriesSpn3"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            app:sp_backColor="#e3e3e3"
+            app:sp_dropIconTint="@android:color/white"
+            app:sp_hasBorder="false"
+            app:sp_hasLabel="true"
+            app:sp_labelText="Countries"
+            app:sp_labelTextColor="@android:color/white"
+            app:sp_labelTextSize="16dp"
+            app:sp_tint="@color/colorPrimary" />
+
+        <awesome.vrund.vpawesomewidgets.VPSpinner
+            android:id="@+id/countriesSpn4"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="10dp"
+            app:sp_dropIconTint="@android:color/white"
+            app:sp_dropSize="48dp"
+            app:sp_hasLabel="false"
+            app:sp_tint="@color/colorAccent" />
+
+        <awesome.vrund.vpawesomewidgets.VPEditText
+            android:id="@+id/editTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:et_borderColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

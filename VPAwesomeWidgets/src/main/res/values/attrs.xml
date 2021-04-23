@@ -48,4 +48,12 @@
         <attr name="sp_enable" format="boolean" />
         <attr name="sp_array" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="VPEditText">
+        <attr name="et_cornerRadius" format="dimension" />
+        <attr name="et_backColor" format="color" />
+        <attr name="et_hasBorder" format="boolean" />
+        <attr name="et_borderColor" format="color" />
+        <attr name="et_enable" format="boolean" />
+    </declare-styleable>
 </resources>
