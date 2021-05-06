@@ -292,7 +292,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
     }
 
     fun getText(): String {
-        return text
+        return vpAutoText.text.toString().trim()
     }
 
     fun setTextColor(textColor: Int) {
