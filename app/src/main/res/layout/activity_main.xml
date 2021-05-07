@@ -123,5 +123,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:et_borderColor="@color/colorPrimaryDark" />
+
+        <awesome.vrund.vpawesomewidgets.VPIconTextView
+            android:id="@+id/demoTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="5dp"
+            android:padding="10dp"
+            android:text="Vrund Is Awesome"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

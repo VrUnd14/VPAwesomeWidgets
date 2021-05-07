@@ -56,4 +56,15 @@
         <attr name="et_borderColor" format="color" />
         <attr name="et_enable" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="VPIconTextView">
+        <attr name="icon" format="reference" />
+        <attr name="icon_size" format="dimension" />
+        <attr name="icon_position" format="enum">
+            <enum name="top" value="1"/>
+            <enum name="bottom" value="2"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="4"/>
+        </attr>
+    </declare-styleable>
 </resources>

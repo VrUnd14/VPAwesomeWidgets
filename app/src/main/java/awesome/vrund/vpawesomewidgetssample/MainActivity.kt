@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import awesome.vrund.vpawesomewidgets.VPAutoCompleteTextView
 import awesome.vrund.vpawesomewidgets.VPBaseAdapter
+import awesome.vrund.vpawesomewidgets.VPIconTextView
 import awesome.vrund.vpawesomewidgets.VPSpinner
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
@@ -59,6 +60,10 @@ class MainActivity : AppCompatActivity(), VPAutoCompleteTextView.OnItemClickList
         val myDropAdp = VPBaseAdapter(context, countries)
         countriesDrop2.setAdapter(myDropAdp)
         countriesDrop2.itemClickListener = this
+
+
+        demoTxt.icon = R.drawable.vp_drop_icon
+        demoTxt.iconPosition = VPIconTextView.TOP
     }
 
     private fun loadJSONFromAsset(): JSONObject? {
