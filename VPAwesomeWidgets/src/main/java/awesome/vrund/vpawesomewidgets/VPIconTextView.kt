@@ -1,8 +1,8 @@
 package awesome.vrund.vpawesomewidgets
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
@@ -17,10 +17,10 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
     private val mContext = context
 
     companion object {
+        const val LEFT = 0
         const val TOP = 1
-        const val BOTTOM = 2
-        const val LEFT = 3
-        const val RIGHT = 4
+        const val RIGHT = 2
+        const val BOTTOM = 3
     }
 
     var icon = 0
@@ -46,10 +46,7 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
             setupIcon()
         }
 
-    private var clickListener: DrawableClickListener? = null
-
-    var actionX = 0
-    var actionY = 0
+    var drawableClickListener: DrawableClickListener? = null
 
     init {
         val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPIconTextView)
@@ -67,10 +64,10 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     private fun setupIcon() {
         when (iconPosition) {
-            TOP -> this.setCompoundDrawablesRelativeWithIntrinsicBounds(null, resizeIcon(), null, null)
-            BOTTOM -> this.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, resizeIcon())
             LEFT -> this.setCompoundDrawablesRelativeWithIntrinsicBounds(resizeIcon(), null, null, null)
+            TOP -> this.setCompoundDrawablesRelativeWithIntrinsicBounds(null, resizeIcon(), null, null)
             RIGHT -> this.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, resizeIcon(), null)
+            BOTTOM -> this.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, resizeIcon())
         }
     }
 
@@ -87,85 +84,30 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
         return null
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        var bounds: Rect?
-        if (event?.action == MotionEvent.ACTION_DOWN) {
-            actionX = event.x.toInt()
-            actionY = event.y.toInt()
-
-            val kek = resizeIcon()
-            if (kek != null && clickListener != null) {
-                when (iconPosition) {
-                    TOP -> if (kek.bounds.contains(actionX, actionY)) {
-                        clickListener?.onClick(DrawablePosition.TOP)
-                        return super.onTouchEvent(event)
-                    }
-                    BOTTOM -> if (kek.bounds.contains(actionX, actionY)) {
-                        clickListener?.onClick(DrawablePosition.BOTTOM)
-                        return super.onTouchEvent(event)
-                    }
-                    LEFT -> {
-                        bounds = kek.bounds
-
-                        var x: Int
-                        var y: Int
-                        val extraTapArea = (13 * resources.displayMetrics.density + 0.5).toInt()
-
-                        x = actionX
-                        y = actionY
-
-                        if (!bounds.contains(actionX, actionY)) {
-                            x = (actionX - extraTapArea)
-                            y = (actionY - extraTapArea)
-
-                            if (x <= 0)
-                                x = actionX
-                            if (y <= 0)
-                                y = actionY
-
-                            if (x < y) {
-                                y = x
-                            }
-                        }
-
-                        if (bounds.contains(x, y)) {
-                            clickListener?.onClick(DrawablePosition.LEFT)
-                            event.action = MotionEvent.ACTION_CANCEL
-                            return false
-
-                        }
-                    }
-                    RIGHT -> {
-                        bounds = kek.bounds
-
-                        var x: Int
-                        var y: Int
-                        val extraTapArea = (13 * resources.displayMetrics.density + 0.5).toInt()
-
-                        x = (actionX + extraTapArea)
-                        y = (actionY - extraTapArea)
-                        x = width - x
-
-                        if (x <= 0) {
-                            x += extraTapArea;
-                        }
-
-                        if (y <= 0) {
-                            y = actionY
-                        }
-
-                        if (bounds.contains(x, y)) {
-                            clickListener?.onClick(DrawablePosition.RIGHT)
-                            event.action = MotionEvent.ACTION_CANCEL
-                            return false
-                        }
-                    }
+        if(event?.action == MotionEvent.ACTION_DOWN) {
+            when (iconPosition) {
+                LEFT -> if(event.rawX <= (this.left + this.compoundDrawables[LEFT].bounds.width())) {
+                    drawableClickListener?.onClick(DrawablePosition.LEFT)
+                    return true
                 }
-                return super.onTouchEvent(event)
+                TOP -> if(event.rawX <= (this.top + this.compoundDrawables[TOP].bounds.width())) {
+                    drawableClickListener?.onClick(DrawablePosition.TOP)
+                    return true
+                }
+                RIGHT -> if(event.rawX <= (this.right + this.compoundDrawables[RIGHT].bounds.width())) {
+                    drawableClickListener?.onClick(DrawablePosition.RIGHT)
+                    return true
+                }
+                BOTTOM -> if(event.rawX <= (this.bottom + this.compoundDrawables[BOTTOM].bounds.width())) {
+                    drawableClickListener?.onClick(DrawablePosition.BOTTOM)
+                    return true
+                }
             }
-            return super.onTouchEvent(event)
+            return false
         }
-        return super.onTouchEvent(event)
+        return false
     }
 
     interface DrawableClickListener {
