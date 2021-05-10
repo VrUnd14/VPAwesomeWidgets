@@ -32,6 +32,11 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
             setupIcon()
         }
 
+    var showIcon = true
+        set(value) {
+            field = value
+            setupIcon()
+        }
     var iconPosition = LEFT
         set(value) {
             field = value
@@ -42,6 +47,7 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
         val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPIconTextView)
 
         icon = parent.getResourceId(R.styleable.VPIconTextView_icon, icon)
+        showIcon = parent.getBoolean(R.styleable.VPIconTextView_showIcon, showIcon)
         iconSize = parent.getDimensionPixelSize(R.styleable.VPIconTextView_icon_size, iconSize)
 
         if (parent.hasValue(R.styleable.VPIconTextView_icon_position)) {
@@ -60,13 +66,14 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     private fun resizeIcon(): Drawable? {
-        return try {
-            var item = mContext.getDrawableFromRes(icon)
-            val bitmap = (item as BitmapDrawable).bitmap
-            item = BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, iconSize, iconSize, true))
-            LayerDrawable(arrayOf(item))
-        } catch (e: Exception) {
-            null
+        if (showIcon) {
+            try {
+                var item = mContext.getDrawableFromRes(icon)
+                val bitmap = (item as BitmapDrawable).bitmap
+                item = BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, iconSize, iconSize, true))
+                return LayerDrawable(arrayOf(item))
+            } catch (e: Exception) {}
         }
+        return null
     }
 }
