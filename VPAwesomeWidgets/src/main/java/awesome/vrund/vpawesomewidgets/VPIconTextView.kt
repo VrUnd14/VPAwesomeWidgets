@@ -9,6 +9,7 @@ import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.graphics.drawable.DrawableCompat
 import awesome.vrund.vpawesomewidgets.VPIconTextView.DrawableClickListener.DrawablePosition
 
 
@@ -35,11 +36,18 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
             setupIcon()
         }
 
+    var iconTint = 0
+        set(value) {
+            field = value
+            setupIcon()
+        }
+
     var showIcon = true
         set(value) {
             field = value
             setupIcon()
         }
+
     var iconPosition = LEFT
         set(value) {
             field = value
@@ -54,6 +62,7 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
         icon = parent.getResourceId(R.styleable.VPIconTextView_icon, icon)
         showIcon = parent.getBoolean(R.styleable.VPIconTextView_showIcon, showIcon)
         iconSize = parent.getDimensionPixelSize(R.styleable.VPIconTextView_icon_size, iconSize)
+        iconTint = parent.getColor(R.styleable.VPIconTextView_iconTint, iconTint)
 
         if (parent.hasValue(R.styleable.VPIconTextView_icon_position)) {
             iconPosition = parent.getInt(R.styleable.VPIconTextView_icon_position, LEFT)
@@ -77,6 +86,9 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
                 var item = mContext.getDrawableFromRes(icon)
                 val bitmap = (item as BitmapDrawable).bitmap
                 item = BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, iconSize, iconSize, true))
+                if (iconTint != 0) {
+                    DrawableCompat.setTint(item, iconTint)
+                }
                 return LayerDrawable(arrayOf(item))
             } catch (e: Exception) {
             }

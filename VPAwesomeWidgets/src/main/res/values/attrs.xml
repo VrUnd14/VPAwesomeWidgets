@@ -60,6 +60,7 @@
     <declare-styleable name="VPIconTextView">
         <attr name="icon" format="reference" />
         <attr name="icon_size" format="dimension" />
+        <attr name="iconTint" format="color" />
         <attr name="showIcon" format="boolean" />
         <attr name="icon_position" format="enum">
             <enum name="left" value="0"/>
