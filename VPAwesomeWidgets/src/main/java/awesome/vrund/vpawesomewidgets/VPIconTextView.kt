@@ -98,21 +98,21 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if(event?.action == MotionEvent.ACTION_DOWN) {
+        if (event?.action == MotionEvent.ACTION_DOWN && showIcon && resizeIcon() != null) {
             when (iconPosition) {
-                LEFT -> if(event.rawX <= (this.left + this.compoundDrawables[LEFT].bounds.width())) {
+                LEFT -> if(event.rawX <= (this.left + this.totalPaddingLeft)) {
                     drawableClickListener?.onClick(DrawablePosition.LEFT)
                     return true
                 }
-                TOP -> if(event.rawX <= (this.top + this.compoundDrawables[TOP].bounds.width())) {
+                TOP -> if(event.rawY <= (this.top + this.totalPaddingTop)) {
                     drawableClickListener?.onClick(DrawablePosition.TOP)
                     return true
                 }
-                RIGHT -> if(event.rawX <= (this.right + this.compoundDrawables[RIGHT].bounds.width())) {
+                RIGHT -> if(event.rawX <= (this.right + this.totalPaddingEnd)) {
                     drawableClickListener?.onClick(DrawablePosition.RIGHT)
                     return true
                 }
-                BOTTOM -> if(event.rawX <= (this.bottom + this.compoundDrawables[BOTTOM].bounds.width())) {
+                BOTTOM -> if(event.rawY <= (this.bottom + this.totalPaddingBottom)) {
                     drawableClickListener?.onClick(DrawablePosition.BOTTOM)
                     return true
                 }

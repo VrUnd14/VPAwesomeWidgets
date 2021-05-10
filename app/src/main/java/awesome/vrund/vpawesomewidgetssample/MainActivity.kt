@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), VPAutoCompleteTextView.OnItemClickList
 
 
         demoTxt.icon = R.drawable.vp_drop_icon
-        demoTxt.iconPosition = VPIconTextView.RIGHT
+        demoTxt.iconPosition = VPIconTextView.BOTTOM
         demoTxt.iconTint = Color.RED
 
         demoTxt.drawableClickListener = object : VPIconTextView.DrawableClickListener {
