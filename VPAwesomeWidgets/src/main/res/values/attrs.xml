@@ -55,6 +55,7 @@
         <attr name="et_hasBorder" format="boolean" />
         <attr name="et_borderColor" format="color" />
         <attr name="et_enable" format="boolean" />
+        <attr name="et_textAllCaps" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="VPIconTextView">
