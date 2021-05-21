@@ -34,7 +34,7 @@ class VPEditText @JvmOverloads constructor(context: Context, attrs: AttributeSet
             updateUI()
         }
 
-    private var textAllCaps = true
+    private var textAllCaps = false
         set(value) {
             field = value
             updateUI()
