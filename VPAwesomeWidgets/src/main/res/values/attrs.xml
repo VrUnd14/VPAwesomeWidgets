@@ -4,6 +4,7 @@
         <attr name="act_backColor" format="color" />
         <attr name="act_hasBorder" format="boolean" />
 
+        <attr name="act_hasDrop" format="boolean" />
         <attr name="act_hasLabel" format="boolean" />
         <attr name="act_labelText" format="string" />
         <attr name="act_labelTextSize" format="dimension" />

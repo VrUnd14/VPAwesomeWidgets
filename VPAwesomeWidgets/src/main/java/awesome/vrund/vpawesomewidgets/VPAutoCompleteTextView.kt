@@ -30,6 +30,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
     private var hasBorder = true
 
     private var hasLabel = true
+    private var hasDrop = true
     private var labelText = ""
     private var labelTextSize = spToPx(14F)
     private var labelTextColor = 0xFF666666.toInt()
@@ -61,6 +62,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
         backColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_backColor, backColor)
         hasBorder = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_hasBorder, hasBorder)
 
+        hasDrop = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_hasDrop, hasDrop)
         hasLabel = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_hasLabel, hasLabel)
         if (parent.hasValue(R.styleable.VPAutoCompleteTextView_act_labelText))
             labelText =
@@ -154,6 +156,11 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
         vpDropIcon.setImageDrawable(dropIcon)
         vpDropIcon.setColorFilter(dropIconTint, PorterDuff.Mode.SRC_ATOP)
         dropGD.setColor(tinColor)
+        if (hasDrop) {
+            vpDropFrame.visibility = View.VISIBLE
+        } else {
+            vpDropFrame.visibility = View.GONE
+        }
 
         // AutoCompleteTextView
         vpAutoText.hint = hint

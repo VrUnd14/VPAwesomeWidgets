@@ -59,6 +59,7 @@
             android:layout_marginTop="15dp"
             app:act_dropIconTint="@android:color/white"
             app:act_dropSize="40dp"
+            app:act_hasDrop="false"
             app:act_hasLabel="true"
             app:act_hint="Select Country"
             app:act_labelText="Countries"
