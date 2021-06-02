@@ -146,7 +146,7 @@
             android:padding="10dp"
             android:textColor="#fff"
             app:isCapsule="true"
-            app:borderWidth="3dp"
+            app:borderWidth="1dp"
             app:backColor="@color/colorPrimaryDark"
             android:text="Vrund Is Awesome"/>
     </LinearLayout>
