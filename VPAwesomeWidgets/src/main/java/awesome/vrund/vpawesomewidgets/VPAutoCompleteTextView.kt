@@ -17,14 +17,14 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.widget.ImageViewCompat
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 
-class VPAutoCompleteTextView @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) :
-    RelativeLayout(context, attrs, defStyleAttr) {
+class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : RelativeLayout(context, attrs, defStyleAttr) {
 
     private val mContext = context
+
+    companion object {
+        const val IN = 1
+        const val TOP = 2
+    }
 
     private var backColor = 0xFFF1F1F1.toInt()
     private var hasBorder = true
@@ -53,6 +53,8 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
     private var textStyle = 0
     private var threshold = 1
 
+    private var position = IN
+
     var itemClickListener: OnItemClickListener? = null
 
     init {
@@ -65,29 +67,18 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
         hasDrop = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_hasDrop, hasDrop)
         hasLabel = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_hasLabel, hasLabel)
         if (parent.hasValue(R.styleable.VPAutoCompleteTextView_act_labelText))
-            labelText =
-                parent.getString(R.styleable.VPAutoCompleteTextView_act_labelText).toString()
-        labelTextSize = parent.getDimensionPixelSize(
-            R.styleable.VPAutoCompleteTextView_act_labelTextSize,
-            labelTextSize
-        )
-        labelTextColor =
-            parent.getColor(R.styleable.VPAutoCompleteTextView_act_labelTextColor, labelTextColor)
+            labelText = parent.getString(R.styleable.VPAutoCompleteTextView_act_labelText).toString()
+        labelTextSize = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_labelTextSize, labelTextSize)
+        labelTextColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_labelTextColor, labelTextColor)
 
-        dropSize =
-            parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_dropSize, dropSize)
-        dropIcon = ContextCompat.getDrawable(
-            mContext,
-            parent.getResourceId(
-                R.styleable.VPAutoCompleteTextView_act_dropIcon,
-                R.drawable.vp_drop_icon
-            )
-        )
-        dropIconTint =
-            parent.getColor(R.styleable.VPAutoCompleteTextView_act_dropIconTint, dropIconTint)
+        dropSize = parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_dropSize, dropSize)
+        dropIcon = ContextCompat.getDrawable(mContext, parent.getResourceId(R.styleable.VPAutoCompleteTextView_act_dropIcon, R.drawable.vp_drop_icon))
+        dropIconTint = parent.getColor(R.styleable.VPAutoCompleteTextView_act_dropIconTint, dropIconTint)
 
         tinColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_tint, tinColor)
         enable = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_enable, enable)
+
+        position = parent.getInt(R.styleable.VPAutoCompleteTextView_act_position, position)
 
         if (parent.hasValue(R.styleable.VPAutoCompleteTextView_act_array)) {
             val arrayID: Int = parent.getResourceId(R.styleable.VPAutoCompleteTextView_act_array, 0)
@@ -100,11 +91,11 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
         if (parent.hasValue(R.styleable.VPAutoCompleteTextView_act_text))
             text = parent.getString(R.styleable.VPAutoCompleteTextView_act_text).toString()
         textAllCaps =
-            parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_textAllCaps, textAllCaps)
+                parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_textAllCaps, textAllCaps)
         hintColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_hintColor, hintColor)
         textColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_textColor, textColor)
         textSize =
-            parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_textSize, textSize)
+                parent.getDimensionPixelSize(R.styleable.VPAutoCompleteTextView_act_textSize, textSize)
         textStyle = parent.getInt(R.styleable.VPAutoCompleteTextView_act_textStyle, textStyle)
 
         parent.recycle()
@@ -119,9 +110,12 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
 
     private fun updateUI() {
 
-        val tinColor = tinColor.takeIf { enable } ?: ColorUtils.blendARGB(tinColor, Color.WHITE,0.6f)
-        val labelTextColor = labelTextColor.takeIf { enable } ?: ColorUtils.blendARGB(labelTextColor, Color.WHITE,0.5f)
-        val dropIconTint = dropIconTint.takeIf { enable } ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE,0.5f)
+        val tinColor = tinColor.takeIf { enable }
+                ?: ColorUtils.blendARGB(tinColor, Color.WHITE, 0.6f)
+        val labelTextColor = labelTextColor.takeIf { enable }
+                ?: ColorUtils.blendARGB(labelTextColor, Color.WHITE, 0.5f)
+        val dropIconTint = dropIconTint.takeIf { enable }
+                ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE, 0.5f)
 
         // Main
         val mainGD = vpParentLayout.background as GradientDrawable
@@ -133,20 +127,26 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
         vpParentLayout.background = mainGD
         // Label
         if (hasLabel) {
-            vpLabel.visibility = View.VISIBLE
-            curveImg.visibility = View.VISIBLE
-            vpAutoText.setPadding(dpToPx(28F), dpToPx(10F), dpToPx(10F), dpToPx(10F))
+            vpInLayout.visibility = View.VISIBLE.takeIf { position == IN } ?: View.GONE
+            vpTopLayout.visibility = View.VISIBLE.takeIf { position == TOP } ?: View.GONE
+            vpAutoText.setPadding(dpToPx(28F.takeIf { position == IN }
+                    ?: 10F), dpToPx(10F), dpToPx(10F), dpToPx(10F))
         } else {
-            vpLabel.visibility = View.GONE
-            curveImg.visibility = View.GONE
+            vpInLayout.visibility = View.GONE
+            vpTopLayout.visibility = View.GONE
             vpAutoText.setPadding(dpToPx(10F), dpToPx(10F), dpToPx(10F), dpToPx(10F))
         }
         vpLabel.text = labelText
+        vpLabelTop.text = labelText
         vpLabel.setTextColor(labelTextColor)
+        vpLabelTop.setTextColor(labelTextColor)
         vpLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, labelTextSize.toFloat())
         val labelGD = vpLabel.background as GradientDrawable
         labelGD.setColor(tinColor)
+        val labelGDTop = vpLabelTop.background as GradientDrawable
+        labelGDTop.setColor(tinColor)
         ImageViewCompat.setImageTintList(curveImg, ColorStateList.valueOf(tinColor))
+        ImageViewCompat.setImageTintList(curveImgTop, ColorStateList.valueOf(tinColor))
 
         // Drop
         val dropGD = vpDropFrame.background as GradientDrawable
@@ -357,17 +357,17 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
 
     private fun dpToPx(dp: Float): Int {
         return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            mContext.resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                mContext.resources.displayMetrics
         ).toInt()
     }
 
     private fun spToPx(sp: Float): Int {
         return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_SP,
-            sp,
-            mContext.resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_SP,
+                sp,
+                mContext.resources.displayMetrics
         ).toInt()
     }
 
@@ -376,7 +376,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(
     }
 
     inner class MyItemClickListener(myAc: VPAutoCompleteTextView) :
-        AdapterView.OnItemClickListener {
+            AdapterView.OnItemClickListener {
 
         private var ac: VPAutoCompleteTextView = myAc
 

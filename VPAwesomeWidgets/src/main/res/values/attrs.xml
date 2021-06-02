@@ -17,6 +17,10 @@
         <attr name="act_tint" format="color" />
         <attr name="act_enable" format="boolean" />
         <attr name="act_array" format="reference" />
+        <attr name="act_position" format="enum">
+            <enum name="in" value="1" />
+            <enum name="top" value="2" />
+        </attr>
 
         <attr name="act_hint" format="string" />
         <attr name="act_text" format="string" />
@@ -48,6 +52,11 @@
         <attr name="sp_tint" format="color" />
         <attr name="sp_enable" format="boolean" />
         <attr name="sp_array" format="reference" />
+
+        <attr name="sp_position" format="enum">
+            <enum name="in" value="1" />
+            <enum name="top" value="2" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="VPEditText">

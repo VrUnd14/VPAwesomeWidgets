@@ -15,14 +15,14 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.widget.ImageViewCompat
 import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 
-class VPSpinner @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) :
-    RelativeLayout(context, attrs, defStyleAttr) {
+class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : RelativeLayout(context, attrs, defStyleAttr) {
 
     private val mContext = context
+
+    companion object {
+        const val IN = 1
+        const val TOP = 2
+    }
 
     private var cornerRadius = dpToPx(5F)
     private var backColor = 0xFFF1F1F1.toInt()
@@ -39,6 +39,8 @@ class VPSpinner @JvmOverloads constructor(
 
     private var tinColor = 0xFFc3c3c3.toInt()
     private var enable = true
+
+    private var position = IN
 
     private var defaultArray: Array<String>? = null
 
@@ -73,6 +75,7 @@ class VPSpinner @JvmOverloads constructor(
 
         tinColor = parent.getColor(R.styleable.VPSpinner_sp_tint, tinColor)
         enable = parent.getBoolean(R.styleable.VPSpinner_sp_enable, enable)
+        position = parent.getInt(R.styleable.VPSpinner_sp_position, position)
 
         if (parent.hasValue(R.styleable.VPSpinner_sp_array)) {
             val arrayID: Int = parent.getResourceId(R.styleable.VPSpinner_sp_array, 0)
@@ -123,21 +126,25 @@ class VPSpinner @JvmOverloads constructor(
 
         // Label
         if (hasLabel) {
-            vpLabel.visibility = View.VISIBLE
-            curveImg.visibility = View.VISIBLE
-            setSpinnerLeftMargin(28F)
+            vpInLayout.visibility = View.VISIBLE.takeIf { position == VPAutoCompleteTextView.IN } ?: View.GONE
+            vpTopLayout.visibility = View.VISIBLE.takeIf { position == VPAutoCompleteTextView.TOP } ?: View.GONE
+            setSpinnerLeftMargin(28F.takeIf { position == IN } ?: 0F)
         } else {
+            vpInLayout.visibility = View.GONE
+            vpTopLayout.visibility = View.GONE
             setSpinnerLeftMargin(0F)
-            vpLabel.visibility = View.GONE
-            curveImg.visibility = View.GONE
         }
         vpLabel.text = labelText
+        vpLabelTop.text = labelText
         vpLabel.setTextColor(labelTextColor)
+        vpLabelTop.setTextColor(labelTextColor)
         vpLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, labelTextSize.toFloat())
         val labelGD = vpLabel.background as GradientDrawable
-//        labelGD.cornerRadii = floatArrayOf(cornerRadius.toFloat(), cornerRadius.toFloat(), 0f, 0f, 0f, 0f, cornerRadius.toFloat(), cornerRadius.toFloat())
         labelGD.setColor(tinColor)
+        val labelGDTop = vpLabelTop.background as GradientDrawable
+        labelGDTop.setColor(tinColor)
         ImageViewCompat.setImageTintList(curveImg, ColorStateList.valueOf(tinColor))
+        ImageViewCompat.setImageTintList(curveImgTop, ColorStateList.valueOf(tinColor))
 
         // Drop
         val dropGD = vpDropFrame.background as GradientDrawable

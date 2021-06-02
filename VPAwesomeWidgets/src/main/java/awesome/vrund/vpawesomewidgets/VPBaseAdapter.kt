@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Filter
 import android.widget.Filterable
-import kotlinx.android.synthetic.main.vp_awesome_widget.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
