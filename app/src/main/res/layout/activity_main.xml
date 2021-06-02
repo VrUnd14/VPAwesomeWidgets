@@ -136,5 +136,18 @@
             app:icon_size="56dp"
             app:iconTint="@color/colorPrimaryDark"
             android:text="Vrund Is Awesome"/>
+
+        <awesome.vrund.vpawesomewidgets.VPBackTextView
+            android:id="@+id/backText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="5dp"
+            android:padding="10dp"
+            android:textColor="#fff"
+            app:isCapsule="true"
+            app:borderWidth="3dp"
+            app:backColor="@color/colorPrimaryDark"
+            android:text="Vrund Is Awesome"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

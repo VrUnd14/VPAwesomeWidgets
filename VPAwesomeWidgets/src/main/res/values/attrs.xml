@@ -71,4 +71,16 @@
             <enum name="bottom" value="3"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="VPBackTextView">
+        <attr name="backColor" format="color" />
+        <attr name="isCapsule" format="boolean" />
+        <attr name="cornerRadiusTopLeft" format="dimension" />
+        <attr name="cornerRadiusBottomLeft" format="dimension" />
+        <attr name="cornerRadiusTopRight" format="dimension" />
+        <attr name="cornerRadiusBottomRight" format="dimension" />
+        <attr name="borderColor" format="color" />
+        <attr name="borderWidth" format="dimension" />
+        <attr name="hasBorder" format="boolean" />
+    </declare-styleable>
 </resources>
