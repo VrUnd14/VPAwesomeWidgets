@@ -132,6 +132,8 @@
             android:layout_marginTop="10dp"
             android:drawablePadding="5dp"
             android:padding="10dp"
+            app:icon_size="56dp"
+            app:iconTint="@color/colorPrimaryDark"
             android:text="Vrund Is Awesome"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

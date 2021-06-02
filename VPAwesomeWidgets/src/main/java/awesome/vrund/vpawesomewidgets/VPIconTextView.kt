@@ -2,11 +2,11 @@ package awesome.vrund.vpawesomewidgets
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.graphics.drawable.DrawableCompat
@@ -84,12 +84,13 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
         if (showIcon) {
             try {
                 var item = mContext.getDrawableFromRes(icon)
-                val bitmap = (item as BitmapDrawable).bitmap
-                item = BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, iconSize, iconSize, true))
+                item = WrappedDrawable(item!!)
+                item.setBounds(0,0, iconSize, iconSize)
                 if (iconTint != 0) {
-                    DrawableCompat.setTint(item, iconTint)
+//                    DrawableCompat.setTint(item, iconTint)
+                    item.setColorFilter(iconTint, PorterDuff.Mode.SRC_ATOP)
                 }
-                return LayerDrawable(arrayOf(item))
+                return item
             } catch (e: Exception) {
             }
         }
@@ -128,5 +129,50 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
         }
 
         fun onClick(target: DrawablePosition)
+    }
+
+    inner class WrappedDrawable(private val drawable: Drawable) : Drawable() {
+
+        override fun setBounds(left: Int, top: Int, right: Int, bottom: Int) {
+            //update bounds to get correctly
+            super.setBounds(left, top, right, bottom)
+            val drawable: Drawable? = drawable
+            drawable?.setBounds(left, top, right, bottom)
+        }
+
+        override fun setAlpha(alpha: Int) {
+            val drawable: Drawable? = drawable
+            if (drawable != null) {
+                drawable.alpha = alpha
+            }
+        }
+
+        override fun setColorFilter(colorFilter: ColorFilter?) {
+            val drawable: Drawable? = drawable
+            if (drawable != null) {
+                drawable.colorFilter = colorFilter
+            }
+        }
+
+        override fun getOpacity(): Int {
+            val drawable: Drawable? = drawable
+            return drawable?.opacity ?: PixelFormat.UNKNOWN
+        }
+
+        override fun draw(canvas: Canvas) {
+            val drawable: Drawable? = drawable
+            drawable?.draw(canvas)
+        }
+
+        override fun getIntrinsicWidth(): Int {
+            val drawable: Drawable? = drawable
+            return drawable?.bounds?.width() ?: 0
+        }
+
+        override fun getIntrinsicHeight(): Int {
+            val drawable: Drawable? = drawable
+            return drawable?.bounds?.height() ?: 0
+        }
+
     }
 }
