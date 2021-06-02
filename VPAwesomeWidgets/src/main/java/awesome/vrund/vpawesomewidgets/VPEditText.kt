@@ -31,6 +31,9 @@ class VPEditText @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private var isEnable = true
         set(value) {
             field = value
+            this.isFocusableInTouchMode = isEnable
+            this.isFocusable = isEnable
+            this.isEnabled = isEnabled
             updateUI()
         }
 
@@ -48,14 +51,14 @@ class VPEditText @JvmOverloads constructor(context: Context, attrs: AttributeSet
         hasBorder = parent.getBoolean(R.styleable.VPEditText_et_hasBorder, hasBorder)
 
         borderColor = parent.getColor(R.styleable.VPEditText_et_borderColor, borderColor)
-        isEnable = parent.getBoolean(R.styleable.VPEditText_et_enable, isEnabled)
+        isEnable = parent.getBoolean(R.styleable.VPEditText_et_enable, isEnable)
         textAllCaps = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_textAllCaps, textAllCaps)
 
         parent.recycle()
     }
 
     private fun updateUI() {
-        val tinColor = borderColor.takeIf { isEnabled }
+        val tinColor = borderColor.takeIf { isEnable }
                 ?: ColorUtils.blendARGB(borderColor, Color.WHITE, 0.6f)
 
         // Main
@@ -63,7 +66,6 @@ class VPEditText @JvmOverloads constructor(context: Context, attrs: AttributeSet
         mainGD.setColor(backColor)
         mainGD.setStroke(1.takeIf { hasBorder } ?: 0, tinColor)
         this.background = mainGD
-        this.isEnabled = isEnabled
 
         if (textAllCaps)
             this.filters = arrayOf(InputFilter.AllCaps())
