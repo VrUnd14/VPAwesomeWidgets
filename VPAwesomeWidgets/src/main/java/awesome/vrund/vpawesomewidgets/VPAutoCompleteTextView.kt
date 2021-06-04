@@ -129,7 +129,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
         if (hasLabel) {
             vpInLayout.visibility = View.VISIBLE.takeIf { position == IN } ?: View.GONE
             vpTopLayout.visibility = View.VISIBLE.takeIf { position == TOP } ?: View.GONE
-            vpAutoText.setPadding(dpToPx(28F.takeIf { position == IN }
+            vpAutoText.setPadding(dpToPx(0F.takeIf { position == IN }
                     ?: 10F), dpToPx(10F), dpToPx(10F), dpToPx(10F))
         } else {
             vpInLayout.visibility = View.GONE
