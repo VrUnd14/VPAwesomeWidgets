@@ -55,7 +55,7 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPSpinner)
 
         cornerRadius =
-            parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_cornerRadius, cornerRadius)
+                parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_cornerRadius, cornerRadius)
         backColor = parent.getColor(R.styleable.VPSpinner_sp_backColor, backColor)
         hasBorder = parent.getBoolean(R.styleable.VPSpinner_sp_hasBorder, hasBorder)
 
@@ -63,13 +63,13 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         if (parent.hasValue(R.styleable.VPSpinner_sp_labelText))
             labelText = parent.getString(R.styleable.VPSpinner_sp_labelText).toString()
         labelTextSize =
-            parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_labelTextSize, labelTextSize)
+                parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_labelTextSize, labelTextSize)
         labelTextColor = parent.getColor(R.styleable.VPSpinner_sp_labelTextColor, labelTextColor)
 
         dropSize = parent.getDimensionPixelSize(R.styleable.VPSpinner_sp_dropSize, dropSize)
         dropIcon = ContextCompat.getDrawable(
-            mContext,
-            parent.getResourceId(R.styleable.VPSpinner_sp_dropIcon, R.drawable.vp_drop_icon)
+                mContext,
+                parent.getResourceId(R.styleable.VPSpinner_sp_dropIcon, R.drawable.vp_drop_icon)
         )
         dropIconTint = parent.getColor(R.styleable.VPSpinner_sp_dropIconTint, dropIconTint)
 
@@ -88,12 +88,7 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         vpSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val item = parent?.selectedItem
                 itemSelectedListener?.onItemSelected(getView(), item, position)
             }
@@ -105,15 +100,12 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     private fun updateUI() {
 
-        val tinColor =
-            tinColor.takeIf { enable } ?: ColorUtils.blendARGB(tinColor, Color.WHITE, 0.6f)
-        val labelTextColor = labelTextColor.takeIf { enable } ?: ColorUtils.blendARGB(
-            labelTextColor,
-            Color.WHITE,
-            0.5f
-        )
-        val dropIconTint =
-            dropIconTint.takeIf { enable } ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE, 0.5f)
+        val tinColor = tinColor.takeIf { enable }
+                ?: ColorUtils.blendARGB(tinColor, Color.WHITE, 0.6f)
+        val labelTextColor = labelTextColor.takeIf { enable }
+                ?: ColorUtils.blendARGB(labelTextColor, Color.WHITE, 0.5f)
+        val dropIconTint = dropIconTint.takeIf { enable }
+                ?: ColorUtils.blendARGB(dropIconTint, Color.WHITE, 0.5f)
 
         // Main
         val mainGD = vpParentLayout.background as GradientDrawable
@@ -126,13 +118,15 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
         // Label
         if (hasLabel) {
-            vpInLayout.visibility = View.VISIBLE.takeIf { position == VPAutoCompleteTextView.IN } ?: View.GONE
-            vpTopLayout.visibility = View.VISIBLE.takeIf { position == VPAutoCompleteTextView.TOP } ?: View.GONE
-            setSpinnerLeftMargin(28F.takeIf { position == IN } ?: 0F)
+            vpInLayout.visibility = View.VISIBLE.takeIf { position == VPAutoCompleteTextView.IN }
+                    ?: View.GONE
+            vpTopLayout.visibility = View.VISIBLE.takeIf { position == VPAutoCompleteTextView.TOP }
+                    ?: View.GONE
+//            setSpinnerLeftMargin(28F.takeIf { position == IN } ?: 0F)
         } else {
             vpInLayout.visibility = View.GONE
             vpTopLayout.visibility = View.GONE
-            setSpinnerLeftMargin(0F)
+//            setSpinnerLeftMargin(0F)
         }
         vpLabel.text = labelText
         vpLabelTop.text = labelText
@@ -293,17 +287,17 @@ class VPSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     private fun dpToPx(dp: Float): Int {
         return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            mContext.resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                mContext.resources.displayMetrics
         ).toInt()
     }
 
     private fun spToPx(sp: Float): Int {
         return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_SP,
-            sp,
-            mContext.resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_SP,
+                sp,
+                mContext.resources.displayMetrics
         ).toInt()
     }
 
