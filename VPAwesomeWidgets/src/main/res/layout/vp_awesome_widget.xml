@@ -55,7 +55,6 @@
             android:layout_toStartOf="@id/vpDropFrame"
             android:layout_toEndOf="@id/vpInLayout"
             android:background="@android:color/transparent"
-            android:inputType="textNoSuggestions"
             android:minHeight="40dp"
             android:padding="10dp"
             android:singleLine="true"

@@ -25,39 +25,6 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
     companion object {
         const val IN = 1
         const val TOP = 2
-
-//        const val none = 0x00000000
-//        const val text = 0x00000001
-//        const val textCapCharacters = 0x00001001
-//        const val textCapWords = 0x00002001
-//        const val textCapSentences = 0x00004001
-//        const val textAutoCorrect = 0x00008001
-//        const val textAutoComplete = 0x00010001
-//        const val textMultiLine = 0x00020001
-//        const val textImeMultiLine = 0x00040001
-//        const val textNoSuggestions = 0x00080001
-//        const val textUri = 0x00000011
-//        const val textEmailAddress = 0x00000021
-//        const val textEmailSubject = 0x00000031
-//        const val textShortMessage = 0x00000041
-//        const val textLongMessage = 0x00000051
-//        const val textPersonName = 0x00000061
-//        const val textPostalAddress = 0x00000071
-//        const val textPassword = 0x00000081
-//        const val textVisiblePassword = 0x00000091
-//        const val textWebEditText = 0x000000a1
-//        const val textFilter = 0x000000b1
-//        const val textPhonetic = 0x000000c1
-//        const val textWebEmailAddress = 0x000000d1
-//        const val textWebPassword = 0x000000e1
-//        const val number = 0x00000002
-//        const val numberSigned = 0x00001002
-//        const val numberDecimal = 0x00002002
-//        const val numberPassword = 0x00000012
-//        const val phone = 0x00000003
-//        const val datetime = 0x00000004
-//        const val date = 0x00000014
-//        const val time = 0x00000024
     }
 
     private var backColor = 0xFFF1F1F1.toInt()
@@ -88,7 +55,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
     private var threshold = 1
 
     private var position = IN
-    private var inputType = 0x00000000
+    private var inputType = InputType.TYPE_CLASS_TEXT
 
     var itemClickListener: OnItemClickListener? = null
 
@@ -112,7 +79,8 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
 
         tinColor = parent.getColor(R.styleable.VPAutoCompleteTextView_act_tint, tinColor)
         enable = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_enable, enable)
-        inputType = parent.getInt(R.styleable.VPAutoCompleteTextView_android_inputType, inputType)
+        if (parent.hasValue(R.styleable.VPAutoCompleteTextView_android_inputType))
+            inputType = parent.getInt(R.styleable.VPAutoCompleteTextView_android_inputType, inputType)
 
         position = parent.getInt(R.styleable.VPAutoCompleteTextView_act_position, position)
 
@@ -161,6 +129,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
         else
             mainGD.setStroke(0, tinColor)
         vpParentLayout.background = mainGD
+
         // Label
         if (hasLabel) {
             vpInLayout.visibility = View.VISIBLE.takeIf { position == IN } ?: View.GONE
