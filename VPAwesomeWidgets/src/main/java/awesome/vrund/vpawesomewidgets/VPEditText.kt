@@ -52,7 +52,7 @@ class VPEditText @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         borderColor = parent.getColor(R.styleable.VPEditText_et_borderColor, borderColor)
         isEnable = parent.getBoolean(R.styleable.VPEditText_et_enable, isEnable)
-        textAllCaps = parent.getBoolean(R.styleable.VPAutoCompleteTextView_act_textAllCaps, textAllCaps)
+        textAllCaps = parent.getBoolean(R.styleable.VPEditText_et_textAllCaps, textAllCaps)
 
         parent.recycle()
     }
