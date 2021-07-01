@@ -1,16 +1,13 @@
 package awesome.vrund.vpawesomewidgets
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
-import android.graphics.drawable.BitmapDrawable
+import android.graphics.Canvas
+import android.graphics.ColorFilter
+import android.graphics.PixelFormat
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.util.Log
-import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.graphics.drawable.DrawableCompat
-import awesome.vrund.vpawesomewidgets.VPIconTextView.DrawableClickListener.DrawablePosition
 
 
 class VPIconTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = android.R.attr.textViewStyle) : AppCompatTextView(context, attrs, defStyleAttr) {
@@ -54,8 +51,6 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
             setupIcon()
         }
 
-    var drawableClickListener: DrawableClickListener? = null
-
     init {
         val parent = mContext.obtainStyledAttributes(attrs, R.styleable.VPIconTextView)
 
@@ -95,40 +90,6 @@ class VPIconTextView @JvmOverloads constructor(context: Context, attrs: Attribut
             }
         }
         return null
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_DOWN && showIcon && resizeIcon() != null) {
-            when (iconPosition) {
-                LEFT -> if(event.rawX <= (this.left + this.totalPaddingLeft)) {
-                    drawableClickListener?.onClick(DrawablePosition.LEFT)
-                    return true
-                }
-                TOP -> if(event.rawY <= (this.top + this.totalPaddingTop)) {
-                    drawableClickListener?.onClick(DrawablePosition.TOP)
-                    return true
-                }
-                RIGHT -> if(event.rawX <= (this.right + this.totalPaddingEnd)) {
-                    drawableClickListener?.onClick(DrawablePosition.RIGHT)
-                    return true
-                }
-                BOTTOM -> if(event.rawY <= (this.bottom + this.totalPaddingBottom)) {
-                    drawableClickListener?.onClick(DrawablePosition.BOTTOM)
-                    return true
-                }
-            }
-            return false
-        }
-        return false
-    }
-
-    interface DrawableClickListener {
-        enum class DrawablePosition {
-            TOP, BOTTOM, LEFT, RIGHT
-        }
-
-        fun onClick(target: DrawablePosition)
     }
 
     inner class WrappedDrawable(private val drawable: Drawable) : Drawable() {

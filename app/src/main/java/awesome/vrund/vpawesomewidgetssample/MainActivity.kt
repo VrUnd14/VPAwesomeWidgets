@@ -63,13 +63,16 @@ class MainActivity : AppCompatActivity(), VPAutoCompleteTextView.OnItemClickList
 
 
         demoTxt.icon = R.drawable.vp_drop_icon
-        demoTxt.iconPosition = VPIconTextView.BOTTOM
         demoTxt.iconTint = Color.RED
 
-        demoTxt.drawableClickListener = object : VPIconTextView.DrawableClickListener {
-            override fun onClick(target: VPIconTextView.DrawableClickListener.DrawablePosition) {
-                Toast.makeText(context, target.toString(), Toast.LENGTH_SHORT).show()
-            }
+//        demoTxt.drawableClickListener = object : VPIconTextView.DrawableClickListener {
+//            override fun onClick(target: VPIconTextView.DrawableClickListener.DrawablePosition) {
+//                Toast.makeText(context, target.toString(), Toast.LENGTH_SHORT).show()
+//            }
+//        }
+
+        demoTxt.setOnClickListener {
+            Toast.makeText(context, "Working...", Toast.LENGTH_SHORT).show()
         }
     }
 
