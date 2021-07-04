@@ -169,7 +169,6 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
 
         // AutoCompleteTextView
         vpAutoText.hint = hint
-        vpAutoText.setText(text)
         vpAutoText.setHintTextColor(hintColor)
         vpAutoText.setTextColor(textColor)
         vpAutoText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
@@ -301,7 +300,7 @@ class VPAutoCompleteTextView @JvmOverloads constructor(context: Context, attrs: 
 
     fun setText(text: String) {
         this.text = text
-        updateUI()
+        vpAutoText.setText(text)
     }
 
     fun getText(): String {
